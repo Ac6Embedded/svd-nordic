@@ -1,0 +1,25 @@
+name: check-updates
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Incremental fetch
+        run: python3 fetch.py
+      - name: Commit and push if changed
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add -A
+            git commit -m "Update SVDs from upstream ($(date -u +%F))"
+            git push
+          else
+            echo "Up to date"
+          fi
