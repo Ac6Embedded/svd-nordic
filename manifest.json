@@ -1,13 +1,13 @@
 {
   "vendor": "Nordic Semiconductor",
-  "generated": "2026-07-19",
+  "generated": "2026-07-27",
   "sources": [
     {
       "name": "nrfx",
       "url": "https://github.com/NordicSemiconductor/nrfx",
-      "version": "d58575ae3c27748cabdfaa1ea2b8a386e6425d75",
+      "version": "1b7bedb5c7f379a3ec3ece851796e94d7e5d0b2c",
       "license": "BSD-3-Clause",
-      "files": 45
+      "files": 50
     }
   ],
   "files": [
@@ -264,6 +264,41 @@
       "provenance": "pristine"
     },
     {
+      "path": "nRF71/nrf7120e_enga_application.svd",
+      "device": "nrf7120e_enga_application",
+      "family": "nRF71",
+      "source": "nrfx",
+      "provenance": "pristine"
+    },
+    {
+      "path": "nRF71/nrf7120e_enga_flpr.svd",
+      "device": "nrf7120e_enga_flpr",
+      "family": "nRF71",
+      "source": "nrfx",
+      "provenance": "pristine"
+    },
+    {
+      "path": "nRF71/nrf7120e_enga_lmac.svd",
+      "device": "nrf7120e_enga_lmac",
+      "family": "nRF71",
+      "source": "nrfx",
+      "provenance": "pristine"
+    },
+    {
+      "path": "nRF71/nrf7120e_enga_umac.svd",
+      "device": "nrf7120e_enga_umac",
+      "family": "nRF71",
+      "source": "nrfx",
+      "provenance": "pristine"
+    },
+    {
+      "path": "nRF71/nrf7120e_enga_wificore.svd",
+      "device": "nrf7120e_enga_wificore",
+      "family": "nRF71",
+      "source": "nrfx",
+      "provenance": "pristine"
+    },
+    {
       "path": "nRF91/nrf9120.svd",
       "device": "nrf9120",
       "family": "nRF91",
@@ -328,7 +363,7 @@
     }
   ],
   "stats": {
-    "total_files": 45,
-    "total_bytes": 177011845
+    "total_files": 50,
+    "total_bytes": 206909474
   }
 }

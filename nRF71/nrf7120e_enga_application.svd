@@ -3,7 +3,7 @@
 <device schemaVersion="1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" noNamespaceSchemaLocation="CMSIS-SVD.xsd">
   <vendor>Nordic Semiconductor</vendor>
   <vendorID>Nordic</vendorID>
-  <name>nrf7120_enga_application</name>
+  <name>nrf7120E_enga_application</name>
   <series>nrf71</series>
   <version>1</version>
   <description>System-on-chip with a 32-bit Arm Cortex-M33 microcontroller</description>
@@ -55,7 +55,7 @@ POSSIBILITY OF SUCH DAMAGE.
     <deviceNumInterrupts>270</deviceNumInterrupts>
     <sauNumRegions>4</sauNumRegions>
   </cpu>
-  <headerSystemFilename>system_nrf7120_enga_application</headerSystemFilename>
+  <headerSystemFilename>system_nrf7120e_enga_application</headerSystemFilename>
   <vendorExtensions>
     <MaxInterrupts>480</MaxInterrupts>
   </vendorExtensions>
@@ -738,6 +738,102 @@ POSSIBILITY OF SUCH DAMAGE.
             </fields>
           </register>
         </cluster>
+        <cluster>
+          <dim>2</dim>
+          <dimIncrement>0x008</dimIncrement>
+          <name>MACADDR[%s]</name>
+          <description>48-bit MAC address n</description>
+          <headerStructName>FICR_MACADDR</headerStructName>
+          <access>read-write</access>
+          <addressOffset>0xC00</addressOffset>
+          <register>
+            <name>LOW</name>
+            <description>Description cluster: Lower 24 bits of MAC address n</description>
+            <addressOffset>0x000</addressOffset>
+            <access>read-only</access>
+            <resetValue>0xFFFFFFFF</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>ADDR</name>
+                <description>MAC address bits [23:0]</description>
+                <lsb>0</lsb>
+                <msb>23</msb>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>HIGH</name>
+            <description>Description cluster: Upper 24 bits of MAC address n</description>
+            <addressOffset>0x004</addressOffset>
+            <access>read-only</access>
+            <resetValue>0xFFFFFFFF</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>ADDR</name>
+                <description>MAC address bits [47:24]</description>
+                <lsb>0</lsb>
+                <msb>23</msb>
+              </field>
+            </fields>
+          </register>
+        </cluster>
+        <cluster>
+          <name>XTALCOMP</name>
+          <description>Crystal oscillator (XTAL) temperature compensation data</description>
+          <headerStructName>FICR_XTALCOMP</headerStructName>
+          <access>read-write</access>
+          <addressOffset>0xC20</addressOffset>
+          <register>
+            <name>OFFSET</name>
+            <description>Measured XTAL frequency error at room temperature</description>
+            <addressOffset>0x000</addressOffset>
+            <access>read-only</access>
+            <resetValue>0xFFFFFFFF</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>OFFSET</name>
+                <description>Frequency error in ppm</description>
+                <lsb>0</lsb>
+                <msb>31</msb>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>LOWTEMPTHRESHOLD</name>
+            <description>Low temperature threshold for frequency skew compensation</description>
+            <addressOffset>0x004</addressOffset>
+            <access>read-only</access>
+            <resetValue>0xFFFFFFFF</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>THRESHOLD</name>
+                <description>Low temperature threshold</description>
+                <lsb>0</lsb>
+                <msb>31</msb>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>LOWTEMPADJUST</name>
+            <description>Frequency adjustment applied below the low temperature threshold</description>
+            <addressOffset>0x008</addressOffset>
+            <access>read-only</access>
+            <resetValue>0xFFFFFFFF</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>ADJUST</name>
+                <description>Frequency adjustment in ppm</description>
+                <lsb>0</lsb>
+                <msb>31</msb>
+              </field>
+            </fields>
+          </register>
+        </cluster>
       </registers>
     </peripheral>
     <peripheral>
@@ -1243,6 +1339,102 @@ POSSIBILITY OF SUCH DAMAGE.
                     <value>0x2</value>
                   </enumeratedValue>
                 </enumeratedValues>
+              </field>
+            </fields>
+          </register>
+        </cluster>
+        <cluster>
+          <dim>2</dim>
+          <dimIncrement>0x008</dimIncrement>
+          <name>MACADDR[%s]</name>
+          <description>48-bit MAC address n</description>
+          <headerStructName>UICR_MACADDR</headerStructName>
+          <access>read-writeonce</access>
+          <addressOffset>0x420</addressOffset>
+          <register>
+            <name>LOW</name>
+            <description>Description cluster: Lower 24 bits of MAC address n</description>
+            <addressOffset>0x000</addressOffset>
+            <access>read-writeonce</access>
+            <resetValue>0xFFFFFFFF</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>ADDR</name>
+                <description>MAC address bits [23:0]</description>
+                <lsb>0</lsb>
+                <msb>23</msb>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>HIGH</name>
+            <description>Description cluster: Upper 24 bits of MAC address n</description>
+            <addressOffset>0x004</addressOffset>
+            <access>read-writeonce</access>
+            <resetValue>0xFFFFFFFF</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>ADDR</name>
+                <description>MAC address bits [47:24]</description>
+                <lsb>0</lsb>
+                <msb>23</msb>
+              </field>
+            </fields>
+          </register>
+        </cluster>
+        <cluster>
+          <name>XTALCOMP</name>
+          <description>Crystal oscillator (XTAL) temperature compensation data</description>
+          <headerStructName>UICR_XTALCOMP</headerStructName>
+          <access>read-writeonce</access>
+          <addressOffset>0x440</addressOffset>
+          <register>
+            <name>OFFSET</name>
+            <description>Measured XTAL frequency error at room temperature</description>
+            <addressOffset>0x000</addressOffset>
+            <access>read-writeonce</access>
+            <resetValue>0xFFFFFFFF</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>OFFSET</name>
+                <description>Frequency error in ppm</description>
+                <lsb>0</lsb>
+                <msb>31</msb>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>LOWTEMPTHRESHOLD</name>
+            <description>Low temperature threshold for frequency skew compensation</description>
+            <addressOffset>0x004</addressOffset>
+            <access>read-writeonce</access>
+            <resetValue>0xFFFFFFFF</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>THRESHOLD</name>
+                <description>Low temperature threshold</description>
+                <lsb>0</lsb>
+                <msb>31</msb>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>LOWTEMPADJUST</name>
+            <description>Frequency adjustment applied below the low temperature threshold</description>
+            <addressOffset>0x008</addressOffset>
+            <access>read-writeonce</access>
+            <resetValue>0xFFFFFFFF</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>ADJUST</name>
+                <description>Frequency adjustment in ppm</description>
+                <lsb>0</lsb>
+                <msb>31</msb>
               </field>
             </fields>
           </register>
@@ -70236,6 +70428,52 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             </fields>
           </register>
         </cluster>
+        <cluster>
+          <name>ERASEPROTECT</name>
+          <description>Unspecified</description>
+          <headerStructName>CTRLAPPERI_ERASEPROTECT</headerStructName>
+          <access>read-write</access>
+          <addressOffset>0x500</addressOffset>
+          <register>
+            <name>LOCK</name>
+            <description>This register locks the ERASEPROTECT.DISABLE register from being written until next reset.</description>
+            <addressOffset>0x000</addressOffset>
+            <access>read-writeonce</access>
+            <resetValue>0x00000000</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>LOCK</name>
+                <description>Writing any value will lock the ERASEPROTECT.DISABLE register from being written until next reset.</description>
+                <lsb>0</lsb>
+                <msb>0</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Locked</name>
+                    <description>Register ERASEPROTECT.DISABLE is read-only.</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>DISABLE</name>
+            <description>This register disables the ERASEPROTECT register and performs an  ERASEALL operation.</description>
+            <addressOffset>0x004</addressOffset>
+            <access>writeonce</access>
+            <resetValue>0x00000000</resetValue>
+            <size>0x20</size>
+            <fields>
+              <field>
+                <name>KEY</name>
+                <description>The ERASEALL sequence is initiated if the value of the KEY fields are non-zero and the KEY fields match on both the CPU and debugger sides.</description>
+                <lsb>0</lsb>
+                <msb>31</msb>
+              </field>
+            </fields>
+          </register>
+        </cluster>
         <register>
           <name>RESET</name>
           <description>System reset request.</description>
@@ -72045,6 +72283,86 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         <name>TIMER00</name>
         <value>85</value>
       </interrupt>
+    </peripheral>
+    <peripheral>
+      <name>GLOBAL_AXONS_NS</name>
+      <description>Neural processing unit (NPU) 0</description>
+      <baseAddress>0x40056000</baseAddress>
+      <headerStructName>AXONS</headerStructName>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x1000</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <groupName>AXONS</groupName>
+      <size>0x20</size>
+      <registers>
+        <register>
+          <name>ENABLE</name>
+          <description>Enable AXONS.</description>
+          <addressOffset>0x400</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>EN</name>
+              <description>Enable</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>AXONS disabled (powered off).</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>AXONS enabled.</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>STATUS</name>
+          <description>Status</description>
+          <addressOffset>0x404</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>READY</name>
+              <description>AXONS ready</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotReady</name>
+                  <description>AXONS is not yet accessible</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Ready</name>
+                  <description>AXONS is accessible</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_AXONS_NS">
+      <name>GLOBAL_AXONS_S</name>
+      <description>Neural processing unit (NPU) 1</description>
+      <baseAddress>0x50056000</baseAddress>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
     </peripheral>
     <peripheral>
       <name>GLOBAL_EGU00_NS</name>
@@ -148636,7 +148954,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <description>Configuration for glitch detector</description>
           <addressOffset>0x5A0</addressOffset>
           <access>read-write</access>
-          <resetValue>0x00000001</resetValue>
+          <resetValue>0x00000000</resetValue>
           <size>0x20</size>
           <fields>
             <field>
