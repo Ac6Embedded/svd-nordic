@@ -3,7 +3,7 @@
 <device schemaVersion="1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" noNamespaceSchemaLocation="CMSIS-SVD.xsd">
   <vendor>Nordic Semiconductor</vendor>
   <vendorID>Nordic</vendorID>
-  <name>nrf7120_enga_lmac</name>
+  <name>nrf7120E_umac</name>
   <series>nrf71</series>
   <version>1</version>
   <description>System-on-chip with a 32-bit Arm Cortex-M33 microcontroller</description>
@@ -44,7 +44,7 @@ POSSIBILITY OF SUCH DAMAGE.
   <resetValue>0x00000000</resetValue>
   <resetMask>0xFFFFFFFF</resetMask>
   <headerDefinitionsPrefix>NRF_</headerDefinitionsPrefix>
-  <headerSystemFilename>system_nrf7120_enga_lmac</headerSystemFilename>
+  <headerSystemFilename>system_nrf7120e_umac</headerSystemFilename>
   <vendorExtensions>
     <MaxInterrupts>480</MaxInterrupts>
   </vendorExtensions>
@@ -66962,6 +66962,78 @@ POSSIBILITY OF SUCH DAMAGE.
       </registers>
     </peripheral>
     <peripheral>
+      <name>GLOBAL_AXONS</name>
+      <description>Neural processing unit (NPU)</description>
+      <baseAddress>0x50056000</baseAddress>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x1000</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <groupName>AXONS</groupName>
+      <size>0x20</size>
+      <registers>
+        <register>
+          <name>ENABLE</name>
+          <description>Enable AXONS.</description>
+          <addressOffset>0x400</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>EN</name>
+              <description>Enable</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>AXONS disabled (powered off).</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>AXONS enabled.</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>STATUS</name>
+          <description>Status</description>
+          <addressOffset>0x404</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>READY</name>
+              <description>AXONS ready</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotReady</name>
+                  <description>AXONS is not yet accessible</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Ready</name>
+                  <description>AXONS is accessible</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    <peripheral>
       <name>GLOBAL_EGU00</name>
       <description>Event generator unit 0</description>
       <baseAddress>0x50058000</baseAddress>
@@ -116244,8 +116316,8 @@ POSSIBILITY OF SUCH DAMAGE.
         <usage>registers</usage>
       </addressBlock>
       <interrupt>
-        <name>GRTC_4</name>
-        <value>230</value>
+        <name>GRTC_5</name>
+        <value>231</value>
       </interrupt>
       <groupName>GRTC</groupName>
       <size>0x20</size>

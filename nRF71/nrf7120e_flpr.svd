@@ -3,7 +3,7 @@
 <device schemaVersion="1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" noNamespaceSchemaLocation="CMSIS-SVD.xsd">
   <vendor>Nordic Semiconductor</vendor>
   <vendorID>Nordic</vendorID>
-  <name>nrf7120_enga_lmac</name>
+  <name>nrf7120E_flpr</name>
   <series>nrf71</series>
   <version>1</version>
   <description>System-on-chip with a 32-bit Arm Cortex-M33 microcontroller</description>
@@ -44,15 +44,16 @@ POSSIBILITY OF SUCH DAMAGE.
   <resetValue>0x00000000</resetValue>
   <resetMask>0xFFFFFFFF</resetMask>
   <headerDefinitionsPrefix>NRF_</headerDefinitionsPrefix>
-  <headerSystemFilename>system_nrf7120_enga_lmac</headerSystemFilename>
+  <headerSystemFilename>system_nrf7120e_flpr</headerSystemFilename>
   <vendorExtensions>
     <MaxInterrupts>480</MaxInterrupts>
   </vendorExtensions>
   <peripherals>
     <peripheral>
-      <name>GLOBAL_WICR</name>
+      <name>GLOBAL_WICR_NS</name>
       <description>Wi-Fi Information Configuration Registers</description>
       <baseAddress>0x003FD000</baseAddress>
+      <headerStructName>WICR</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=NS-->
       <addressBlock>
@@ -263,9 +264,10 @@ POSSIBILITY OF SUCH DAMAGE.
       </registers>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_FICR</name>
+      <name>GLOBAL_FICR_NS</name>
       <description>Factory Information Configuration Registers</description>
       <baseAddress>0x00FFC000</baseAddress>
+      <headerStructName>FICR</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=NS-->
       <addressBlock>
@@ -840,9 +842,10 @@ POSSIBILITY OF SUCH DAMAGE.
       </registers>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_UICR</name>
+      <name>GLOBAL_UICR_S</name>
       <description>User Information Configuration Registers</description>
       <baseAddress>0x00FFD000</baseAddress>
+      <headerStructName>UICR</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=S-->
       <addressBlock>
@@ -1462,9 +1465,10 @@ POSSIBILITY OF SUCH DAMAGE.
       </registers>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_SICR</name>
+      <name>GLOBAL_SICR_S</name>
       <description>Factory Information Configuration Registers</description>
       <baseAddress>0x00FFE000</baseAddress>
+      <headerStructName>SICR</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=S-->
       <addressBlock>
@@ -1485,9 +1489,10 @@ POSSIBILITY OF SUCH DAMAGE.
       </registers>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_CRACENCORE</name>
+      <name>GLOBAL_CRACENCORE_S</name>
       <description>CRACENCORE</description>
       <baseAddress>0x50010000</baseAddress>
+      <headerStructName>CRACENCORE</headerStructName>
       <!--Security dma=NSA-->
       <!--Security securemapping=S-->
       <addressBlock>
@@ -4067,10 +4072,12 @@ POSSIBILITY OF SUCH DAMAGE.
       </registers>
     </peripheral>
     <peripheral>
-      <name>VPRCLIC</name>
+      <name>VPRCLIC_NS</name>
       <description>VPR CLIC registers</description>
       <baseAddress>0xF0000000</baseAddress>
       <headerStructName>CLIC</headerStructName>
+      <!--Security dma=NA-->
+      <!--Security securemapping=NS-->
       <addressBlock>
         <offset>0</offset>
         <size>0x3000</size>
@@ -4103,10 +4110,6 @@ POSSIBILITY OF SUCH DAMAGE.
       <interrupt>
         <name>VPRCLIC_22</name>
         <value>22</value>
-      </interrupt>
-      <interrupt>
-        <name>VPRCLIC_23</name>
-        <value>23</value>
       </interrupt>
       <groupName>CLIC</groupName>
       <size>0x20</size>
@@ -4350,9 +4353,11 @@ POSSIBILITY OF SUCH DAMAGE.
       </registers>
     </peripheral>
     <peripheral>
-      <name>VPRTIM</name>
+      <name>VPRTIM_NS</name>
       <description>VTIM CSR registers</description>
       <baseAddress>0x00000000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=NS-->
       <addressBlock>
         <offset>0</offset>
         <size>0x1000</size>
@@ -4360,7 +4365,7 @@ POSSIBILITY OF SUCH DAMAGE.
       </addressBlock>
       <interrupt>
         <name>VPRTIM</name>
-        <value>7</value>
+        <value>31</value>
       </interrupt>
       <groupName>VTIM</groupName>
       <size>0x20</size>
@@ -4375,9 +4380,10 @@ POSSIBILITY OF SUCH DAMAGE.
       </registers>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_USBHSCORE</name>
-      <description>USBHSCORE</description>
-      <baseAddress>0x50020000</baseAddress>
+      <name>GLOBAL_USBHSCORE_NS</name>
+      <description>USBHSCORE 0</description>
+      <baseAddress>0x40020000</baseAddress>
+      <headerStructName>USBHSCORE</headerStructName>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <addressBlock>
@@ -34380,11 +34386,18 @@ POSSIBILITY OF SUCH DAMAGE.
         </cluster>
       </registers>
     </peripheral>
+    <peripheral derivedFrom="GLOBAL_USBHSCORE_NS">
+      <name>GLOBAL_USBHSCORE_S</name>
+      <description>USBHSCORE 1</description>
+      <baseAddress>0x50020000</baseAddress>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+    </peripheral>
     <peripheral>
-      <name>GLOBAL_SPU00</name>
+      <name>GLOBAL_SPU00_S</name>
       <description>System protection unit 0</description>
       <baseAddress>0x50040000</baseAddress>
-      <alternatePeripheral>GLOBAL_USBHSCORE</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_USBHSCORE_S</alternatePeripheral>
       <headerStructName>SPU</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=S-->
@@ -34393,6 +34406,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>SPU00</name>
+        <value>64</value>
+      </interrupt>
       <groupName>SPU</groupName>
       <size>0x20</size>
       <registers>
@@ -35704,10 +35721,10 @@ POSSIBILITY OF SUCH DAMAGE.
       </registers>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_MPC00</name>
+      <name>GLOBAL_MPC00_S</name>
       <description>Memory Privilege Controller 0</description>
       <baseAddress>0x50041000</baseAddress>
-      <alternatePeripheral>GLOBAL_USBHSCORE</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_USBHSCORE_S</alternatePeripheral>
       <headerStructName>MPC</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=S-->
@@ -35716,6 +35733,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>MPC00</name>
+        <value>65</value>
+      </interrupt>
       <groupName>MPC</groupName>
       <size>0x20</size>
       <registers>
@@ -36300,10 +36321,10 @@ POSSIBILITY OF SUCH DAMAGE.
       </registers>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_DPPIC00</name>
+      <name>GLOBAL_DPPIC00_NS</name>
       <description>Distributed programmable peripheral interconnect controller 0</description>
-      <baseAddress>0x50042000</baseAddress>
-      <alternatePeripheral>GLOBAL_USBHSCORE</alternatePeripheral>
+      <baseAddress>0x40042000</baseAddress>
+      <alternatePeripheral>GLOBAL_USBHSCORE_NS</alternatePeripheral>
       <headerStructName>DPPIC</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
@@ -38652,18 +38673,31 @@ POSSIBILITY OF SUCH DAMAGE.
         </register>
       </registers>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_MPC00">
-      <name>GLOBAL_MPC03</name>
+    <peripheral derivedFrom="GLOBAL_DPPIC00_NS">
+      <name>GLOBAL_DPPIC00_S</name>
+      <description>Distributed programmable peripheral interconnect controller 1</description>
+      <baseAddress>0x50042000</baseAddress>
+      <alternatePeripheral>GLOBAL_USBHSCORE_S</alternatePeripheral>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <!--Split access-->
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_MPC00_S">
+      <name>GLOBAL_MPC03_S</name>
       <description>Memory Privilege Controller 1</description>
       <baseAddress>0x50043000</baseAddress>
-      <alternatePeripheral>GLOBAL_USBHSCORE</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_USBHSCORE_S</alternatePeripheral>
       <!--Security dma=NA-->
       <!--Security securemapping=S-->
+      <interrupt>
+        <name>MPC03</name>
+        <value>67</value>
+      </interrupt>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_PPIB00</name>
+      <name>GLOBAL_PPIB00_NS</name>
       <description>PPIB APB registers 0</description>
-      <baseAddress>0x50044000</baseAddress>
+      <baseAddress>0x40044000</baseAddress>
       <headerStructName>PPIB</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
@@ -39395,17 +39429,32 @@ POSSIBILITY OF SUCH DAMAGE.
         </cluster>
       </registers>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_PPIB00">
-      <name>GLOBAL_PPIB01</name>
+    <peripheral derivedFrom="GLOBAL_PPIB00_NS">
+      <name>GLOBAL_PPIB00_S</name>
       <description>PPIB APB registers 1</description>
+      <baseAddress>0x50044000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_PPIB00_NS">
+      <name>GLOBAL_PPIB01_NS</name>
+      <description>PPIB APB registers 2</description>
+      <baseAddress>0x40045000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_PPIB00_NS">
+      <name>GLOBAL_PPIB01_S</name>
+      <description>PPIB APB registers 3</description>
       <baseAddress>0x50045000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
     </peripheral>
     <peripheral>
-      <name>GLOBAL_KMU</name>
+      <name>GLOBAL_KMU_S</name>
       <description>Key management unit</description>
       <baseAddress>0x50049000</baseAddress>
+      <headerStructName>KMU</headerStructName>
       <!--Security dma=NSA-->
       <!--Security securemapping=S-->
       <addressBlock>
@@ -39941,9 +39990,9 @@ POSSIBILITY OF SUCH DAMAGE.
       </registers>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_AAR00</name>
-      <description>Accelerated Address Resolver</description>
-      <baseAddress>0x5004A000</baseAddress>
+      <name>GLOBAL_AAR00_NS</name>
+      <description>Accelerated Address Resolver 0</description>
+      <baseAddress>0x4004A000</baseAddress>
       <headerStructName>AAR</headerStructName>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
@@ -39952,6 +40001,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>AAR00_CCM00</name>
+        <value>74</value>
+      </interrupt>
       <groupName>AAR</groupName>
       <size>0x20</size>
       <registers>
@@ -40702,10 +40755,10 @@ POSSIBILITY OF SUCH DAMAGE.
       </registers>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_CCM00</name>
-      <description>AES CCM Mode Encryption</description>
-      <baseAddress>0x5004A000</baseAddress>
-      <alternatePeripheral>GLOBAL_AAR00</alternatePeripheral>
+      <name>GLOBAL_CCM00_NS</name>
+      <description>AES CCM Mode Encryption 0</description>
+      <baseAddress>0x4004A000</baseAddress>
+      <alternatePeripheral>GLOBAL_AAR00_NS</alternatePeripheral>
       <headerStructName>CCM</headerStructName>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
@@ -40714,6 +40767,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>AAR00_CCM00</name>
+        <value>74</value>
+      </interrupt>
       <groupName>CCM</groupName>
       <size>0x20</size>
       <registers>
@@ -41532,10 +41589,33 @@ POSSIBILITY OF SUCH DAMAGE.
         </register>
       </registers>
     </peripheral>
+    <peripheral derivedFrom="GLOBAL_AAR00_NS">
+      <name>GLOBAL_AAR00_S</name>
+      <description>Accelerated Address Resolver 1</description>
+      <baseAddress>0x5004A000</baseAddress>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>AAR00_CCM00</name>
+        <value>74</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_CCM00_NS">
+      <name>GLOBAL_CCM00_S</name>
+      <description>AES CCM Mode Encryption 1</description>
+      <baseAddress>0x5004A000</baseAddress>
+      <alternatePeripheral>GLOBAL_AAR00_S</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>AAR00_CCM00</name>
+        <value>74</value>
+      </interrupt>
+    </peripheral>
     <peripheral>
-      <name>GLOBAL_ECB00</name>
-      <description>AES ECB Mode Encryption</description>
-      <baseAddress>0x5004B000</baseAddress>
+      <name>GLOBAL_ECB00_NS</name>
+      <description>AES ECB Mode Encryption 0</description>
+      <baseAddress>0x4004B000</baseAddress>
       <headerStructName>ECB</headerStructName>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
@@ -41544,6 +41624,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>ECB00</name>
+        <value>75</value>
+      </interrupt>
       <groupName>ECB</groupName>
       <size>0x20</size>
       <registers>
@@ -42099,10 +42183,21 @@ POSSIBILITY OF SUCH DAMAGE.
         </cluster>
       </registers>
     </peripheral>
+    <peripheral derivedFrom="GLOBAL_ECB00_NS">
+      <name>GLOBAL_ECB00_S</name>
+      <description>AES ECB Mode Encryption 1</description>
+      <baseAddress>0x5004B000</baseAddress>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>ECB00</name>
+        <value>75</value>
+      </interrupt>
+    </peripheral>
     <peripheral>
-      <name>GLOBAL_VPR00</name>
-      <description>VPR peripheral registers</description>
-      <baseAddress>0x5004C000</baseAddress>
+      <name>GLOBAL_VPR00_NS</name>
+      <description>VPR peripheral registers 0</description>
+      <baseAddress>0x4004C000</baseAddress>
       <headerStructName>VPR</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
@@ -42111,6 +42206,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>VPR00</name>
+        <value>76</value>
+      </interrupt>
       <groupName>VPR</groupName>
       <size>0x20</size>
       <registers>
@@ -46724,10 +46823,21 @@ POSSIBILITY OF SUCH DAMAGE.
         </register>
       </registers>
     </peripheral>
+    <peripheral derivedFrom="GLOBAL_VPR00_NS">
+      <name>GLOBAL_VPR00_S</name>
+      <description>VPR peripheral registers 1</description>
+      <baseAddress>0x5004C000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>VPR00</name>
+        <value>76</value>
+      </interrupt>
+    </peripheral>
     <peripheral>
-      <name>GLOBAL_SPIM00</name>
+      <name>GLOBAL_SPIM00_NS</name>
       <description>Serial Peripheral Interface Master with EasyDMA 0</description>
-      <baseAddress>0x5004D000</baseAddress>
+      <baseAddress>0x4004D000</baseAddress>
       <headerStructName>SPIM</headerStructName>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
@@ -49544,10 +49654,10 @@ POSSIBILITY OF SUCH DAMAGE.
       </registers>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_SPIS00</name>
+      <name>GLOBAL_SPIS00_NS</name>
       <description>SPI Slave 0</description>
-      <baseAddress>0x5004D000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPIM00</alternatePeripheral>
+      <baseAddress>0x4004D000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM00_NS</alternatePeripheral>
       <headerStructName>SPIS</headerStructName>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
@@ -52114,10 +52224,10 @@ POSSIBILITY OF SUCH DAMAGE.
       </registers>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_UARTE00</name>
+      <name>GLOBAL_UARTE00_NS</name>
       <description>UART with EasyDMA 0</description>
-      <baseAddress>0x5004D000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPIM00</alternatePeripheral>
+      <baseAddress>0x4004D000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM00_NS</alternatePeripheral>
       <headerStructName>UARTE</headerStructName>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
@@ -56224,10 +56334,46 @@ POSSIBILITY OF SUCH DAMAGE.
         </cluster>
       </registers>
     </peripheral>
+    <peripheral derivedFrom="GLOBAL_SPIM00_NS">
+      <name>GLOBAL_SPIM00_S</name>
+      <description>Serial Peripheral Interface Master with EasyDMA 1</description>
+      <baseAddress>0x5004D000</baseAddress>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL00</name>
+        <value>77</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_SPIS00_NS">
+      <name>GLOBAL_SPIS00_S</name>
+      <description>SPI Slave 1</description>
+      <baseAddress>0x5004D000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM00_S</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL00</name>
+        <value>77</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_UARTE00_NS">
+      <name>GLOBAL_UARTE00_S</name>
+      <description>UART with EasyDMA 1</description>
+      <baseAddress>0x5004D000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM00_S</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL00</name>
+        <value>77</value>
+      </interrupt>
+    </peripheral>
     <peripheral>
-      <name>GLOBAL_MRAMC</name>
+      <name>GLOBAL_MRAMC_S</name>
       <description>MRAM controller</description>
       <baseAddress>0x5004E000</baseAddress>
+      <headerStructName>MRAMC</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=S-->
       <addressBlock>
@@ -56235,6 +56381,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>MRAMC</name>
+        <value>78</value>
+      </interrupt>
       <groupName>MRAMC</groupName>
       <size>0x20</size>
       <registers>
@@ -58412,271 +58562,9 @@ POSSIBILITY OF SUCH DAMAGE.
       </registers>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_GPIOHSPADCTRL</name>
-      <description>GPIO high-speed pad control</description>
-      <baseAddress>0x50050400</baseAddress>
-      <!--Security dma=NA-->
-      <!--Security securemapping=S-->
-      <addressBlock>
-        <offset>0</offset>
-        <size>0x1000</size>
-        <usage>registers</usage>
-      </addressBlock>
-      <groupName>GPIOHSPADCTRL</groupName>
-      <size>0x20</size>
-      <registers>
-        <register>
-          <name>BIAS</name>
-          <description>Bias control</description>
-          <addressOffset>0x30</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>HSBIAS</name>
-              <description>Slew setting for high-speed pad (higher value is faster)</description>
-              <lsb>0</lsb>
-              <msb>1</msb>
-            </field>
-            <field>
-              <name>REPLICABIAS00</name>
-              <description>Slew setting for replica clock (used by the MSPI00 peripheral)</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-            </field>
-            <field>
-              <name>REPLICABIAS01</name>
-              <description>Slew setting for replica clock (used by the MSPI01 peripheral)</description>
-              <lsb>3</lsb>
-              <msb>3</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>OVERRIDE</name>
-          <description>Override control</description>
-          <addressOffset>0x34</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>FORCEON</name>
-              <description>Force on</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-            </field>
-            <field>
-              <name>ATB0</name>
-              <description>ATB0 settings</description>
-              <lsb>1</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>BiasTrim</name>
-                  <description>Unspecified</description>
-                  <value>0x7</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>BiasSupply</name>
-                  <description>Unspecified</description>
-                  <value>0x6</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>BiasPTAT</name>
-                  <description>Unspecified</description>
-                  <value>0x5</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DUALDRIVE</name>
-              <description>Drive pad from both high-speed pad and regular pad (when highspeed is enabled)</description>
-              <lsb>4</lsb>
-              <msb>4</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <dim>0x2</dim>
-          <dimIncrement>0x4</dimIncrement>
-          <name>CTRL[%s]</name>
-          <description>Description collection: Input sampling and buffering control (used by the MSPI0n peripheral)</description>
-          <addressOffset>0x38</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <size>0x20</size>
-          <fields>
-            <field>
-              <name>RXDELAY</name>
-              <description>Delay selection</description>
-              <lsb>0</lsb>
-              <msb>2</msb>
-            </field>
-            <field>
-              <name>SCKEN</name>
-              <description>Enable SCK</description>
-              <lsb>3</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Delay chain is reset and delayed sampling is disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Delay chain and delayed sampling is active</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SCKPHASE</name>
-              <description>Feedback serial clock (SCKFB) sampling edge for input data</description>
-              <lsb>4</lsb>
-              <msb>4</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Rising</name>
-                  <description>Sample on SCK rising edge</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Falling</name>
-                  <description>Sample on SCK falling edge</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DATAENABLE</name>
-              <description>Enable delayed sampling</description>
-              <lsb>6</lsb>
-              <msb>9</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Delayed sampling is disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Delayed sampling is enabled</description>
-                  <value>0xF</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>REPLICACLKLOAD</name>
-              <description>Load capacitor used by replica clock pad</description>
-              <lsb>12</lsb>
-              <msb>13</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Cap0p75</name>
-                  <description>Load capacitance of 0.75 pF</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Cap1p50</name>
-                  <description>Load capacitance of 1.5 pF</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Cap2p25</name>
-                  <description>Load capacitance of 2.25 pF</description>
-                  <value>0x2</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Cap3p00</name>
-                  <description>Load capacitance of 3.0 pF</description>
-                  <value>0x3</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>OUTPUTCPOL</name>
-              <description>Serial clock (SCK) polarity for output data delay</description>
-              <lsb>14</lsb>
-              <msb>14</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>ActiveHigh</name>
-                  <description>Active high (idle state low)</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>ActiveLow</name>
-                  <description>Active low (idle state high)</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>OUTPUTCHPA</name>
-              <description>Serial clock (SCK) phase for output data delay</description>
-              <lsb>15</lsb>
-              <msb>15</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Leading</name>
-                  <description>Sample on leading edge of clock</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Trailing</name>
-                  <description>Sample on trailing edge of clock</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CSNPOL</name>
-              <description>Chip Select (CSN) Polarity</description>
-              <lsb>16</lsb>
-              <msb>16</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>LOW</name>
-                  <description>Active low (idle state high)</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>HIGH</name>
-                  <description>Active high (idle state low)</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SCKFBPADEN</name>
-              <description>Set IE/OE of the SCK feedback (FB) pad. This field needs to be set before SCKEN.</description>
-              <lsb>17</lsb>
-              <msb>17</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>FB pad IE/OE disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>FB pad IE/OE enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-      </registers>
-    </peripheral>
-    <peripheral>
-      <name>GLOBAL_P2</name>
+      <name>GLOBAL_P2_NS</name>
       <description>GPIO Port 0</description>
-      <baseAddress>0x50050400</baseAddress>
-      <alternatePeripheral>GLOBAL_GPIOHSPADCTRL</alternatePeripheral>
+      <baseAddress>0x40050400</baseAddress>
       <headerStructName>GPIO</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
@@ -64748,9 +64636,280 @@ POSSIBILITY OF SUCH DAMAGE.
       </registers>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_CTRLAP</name>
-      <description>Control access port</description>
-      <baseAddress>0x50052000</baseAddress>
+      <name>GLOBAL_GPIOHSPADCTRL_S</name>
+      <description>GPIO high-speed pad control</description>
+      <baseAddress>0x50050400</baseAddress>
+      <headerStructName>GPIOHSPADCTRL</headerStructName>
+      <!--Security dma=NA-->
+      <!--Security securemapping=S-->
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x1000</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <groupName>GPIOHSPADCTRL</groupName>
+      <size>0x20</size>
+      <registers>
+        <register>
+          <name>BIAS</name>
+          <description>Bias control</description>
+          <addressOffset>0x30</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>HSBIAS</name>
+              <description>Slew setting for high-speed pad (higher value is faster)</description>
+              <lsb>0</lsb>
+              <msb>1</msb>
+            </field>
+            <field>
+              <name>REPLICABIAS00</name>
+              <description>Slew setting for replica clock (used by the MSPI00 peripheral)</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+            </field>
+            <field>
+              <name>REPLICABIAS01</name>
+              <description>Slew setting for replica clock (used by the MSPI01 peripheral)</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>OVERRIDE</name>
+          <description>Override control</description>
+          <addressOffset>0x34</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>FORCEON</name>
+              <description>Force on</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+            </field>
+            <field>
+              <name>ATB0</name>
+              <description>ATB0 settings</description>
+              <lsb>1</lsb>
+              <msb>3</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>BiasTrim</name>
+                  <description>Unspecified</description>
+                  <value>0x7</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>BiasSupply</name>
+                  <description>Unspecified</description>
+                  <value>0x6</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>BiasPTAT</name>
+                  <description>Unspecified</description>
+                  <value>0x5</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DUALDRIVE</name>
+              <description>Drive pad from both high-speed pad and regular pad (when highspeed is enabled)</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <dim>0x2</dim>
+          <dimIncrement>0x4</dimIncrement>
+          <name>CTRL[%s]</name>
+          <description>Description collection: Input sampling and buffering control (used by the MSPI0n peripheral)</description>
+          <addressOffset>0x38</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>RXDELAY</name>
+              <description>Delay selection</description>
+              <lsb>0</lsb>
+              <msb>2</msb>
+            </field>
+            <field>
+              <name>SCKEN</name>
+              <description>Enable SCK</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Delay chain is reset and delayed sampling is disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Delay chain and delayed sampling is active</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>SCKPHASE</name>
+              <description>Feedback serial clock (SCKFB) sampling edge for input data</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Rising</name>
+                  <description>Sample on SCK rising edge</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Falling</name>
+                  <description>Sample on SCK falling edge</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DATAENABLE</name>
+              <description>Enable delayed sampling</description>
+              <lsb>6</lsb>
+              <msb>9</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Delayed sampling is disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Delayed sampling is enabled</description>
+                  <value>0xF</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>REPLICACLKLOAD</name>
+              <description>Load capacitor used by replica clock pad</description>
+              <lsb>12</lsb>
+              <msb>13</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Cap0p75</name>
+                  <description>Load capacitance of 0.75 pF</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Cap1p50</name>
+                  <description>Load capacitance of 1.5 pF</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Cap2p25</name>
+                  <description>Load capacitance of 2.25 pF</description>
+                  <value>0x2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Cap3p00</name>
+                  <description>Load capacitance of 3.0 pF</description>
+                  <value>0x3</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>OUTPUTCPOL</name>
+              <description>Serial clock (SCK) polarity for output data delay</description>
+              <lsb>14</lsb>
+              <msb>14</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>ActiveHigh</name>
+                  <description>Active high (idle state low)</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>ActiveLow</name>
+                  <description>Active low (idle state high)</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>OUTPUTCHPA</name>
+              <description>Serial clock (SCK) phase for output data delay</description>
+              <lsb>15</lsb>
+              <msb>15</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Leading</name>
+                  <description>Sample on leading edge of clock</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Trailing</name>
+                  <description>Sample on trailing edge of clock</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CSNPOL</name>
+              <description>Chip Select (CSN) Polarity</description>
+              <lsb>16</lsb>
+              <msb>16</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>LOW</name>
+                  <description>Active low (idle state high)</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>HIGH</name>
+                  <description>Active high (idle state low)</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>SCKFBPADEN</name>
+              <description>Set IE/OE of the SCK feedback (FB) pad. This field needs to be set before SCKEN.</description>
+              <lsb>17</lsb>
+              <msb>17</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>FB pad IE/OE disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>FB pad IE/OE enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_P2_NS">
+      <name>GLOBAL_P2_S</name>
+      <description>GPIO Port 1</description>
+      <baseAddress>0x50050400</baseAddress>
+      <alternatePeripheral>GLOBAL_GPIOHSPADCTRL_S</alternatePeripheral>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <!--Split access-->
+    </peripheral>
+    <peripheral>
+      <name>GLOBAL_CTRLAP_NS</name>
+      <description>Control access port 0</description>
+      <baseAddress>0x40052000</baseAddress>
       <headerStructName>CTRLAPPERI</headerStructName>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
@@ -64759,6 +64918,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>CTRLAP</name>
+        <value>82</value>
+      </interrupt>
       <groupName>CTRLAPPERI</groupName>
       <size>0x20</size>
       <registers>
@@ -65225,10 +65388,22 @@ POSSIBILITY OF SUCH DAMAGE.
         </register>
       </registers>
     </peripheral>
+    <peripheral derivedFrom="GLOBAL_CTRLAP_NS">
+      <name>GLOBAL_CTRLAP_S</name>
+      <description>Control access port 1</description>
+      <baseAddress>0x50052000</baseAddress>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>CTRLAP</name>
+        <value>82</value>
+      </interrupt>
+    </peripheral>
     <peripheral>
-      <name>GLOBAL_TAD</name>
-      <description>Trace and debug control</description>
-      <baseAddress>0x50053000</baseAddress>
+      <name>GLOBAL_TAD_NS</name>
+      <description>Trace and debug control 0</description>
+      <baseAddress>0x40053000</baseAddress>
+      <headerStructName>TAD</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <addressBlock>
@@ -65378,10 +65553,17 @@ POSSIBILITY OF SUCH DAMAGE.
         </register>
       </registers>
     </peripheral>
+    <peripheral derivedFrom="GLOBAL_TAD_NS">
+      <name>GLOBAL_TAD_S</name>
+      <description>Trace and debug control 1</description>
+      <baseAddress>0x50053000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+    </peripheral>
     <peripheral>
-      <name>GLOBAL_TIMER00</name>
+      <name>GLOBAL_TIMER00_NS</name>
       <description>Timer/Counter 0</description>
-      <baseAddress>0x50055000</baseAddress>
+      <baseAddress>0x40055000</baseAddress>
       <headerStructName>TIMER</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
@@ -65390,6 +65572,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>TIMER00</name>
+        <value>85</value>
+      </interrupt>
       <groupName>TIMER</groupName>
       <size>0x20</size>
       <registers>
@@ -66961,10 +67147,101 @@ POSSIBILITY OF SUCH DAMAGE.
         </register>
       </registers>
     </peripheral>
+    <peripheral derivedFrom="GLOBAL_TIMER00_NS">
+      <name>GLOBAL_TIMER00_S</name>
+      <description>Timer/Counter 1</description>
+      <baseAddress>0x50055000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>TIMER00</name>
+        <value>85</value>
+      </interrupt>
+    </peripheral>
     <peripheral>
-      <name>GLOBAL_EGU00</name>
+      <name>GLOBAL_AXONS_NS</name>
+      <description>Neural processing unit (NPU) 0</description>
+      <baseAddress>0x40056000</baseAddress>
+      <headerStructName>AXONS</headerStructName>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x1000</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <groupName>AXONS</groupName>
+      <size>0x20</size>
+      <registers>
+        <register>
+          <name>ENABLE</name>
+          <description>Enable AXONS.</description>
+          <addressOffset>0x400</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>EN</name>
+              <description>Enable</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>AXONS disabled (powered off).</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>AXONS enabled.</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>STATUS</name>
+          <description>Status</description>
+          <addressOffset>0x404</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <size>0x20</size>
+          <fields>
+            <field>
+              <name>READY</name>
+              <description>AXONS ready</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotReady</name>
+                  <description>AXONS is not yet accessible</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Ready</name>
+                  <description>AXONS is accessible</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_AXONS_NS">
+      <name>GLOBAL_AXONS_S</name>
+      <description>Neural processing unit (NPU) 1</description>
+      <baseAddress>0x50056000</baseAddress>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+    </peripheral>
+    <peripheral>
+      <name>GLOBAL_EGU00_NS</name>
       <description>Event generator unit 0</description>
-      <baseAddress>0x50058000</baseAddress>
+      <baseAddress>0x40058000</baseAddress>
       <headerStructName>EGU</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
@@ -66973,6 +67250,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>EGU00</name>
+        <value>88</value>
+      </interrupt>
       <groupName>EGU</groupName>
       <size>0x20</size>
       <registers>
@@ -68317,10 +68598,22 @@ POSSIBILITY OF SUCH DAMAGE.
         </register>
       </registers>
     </peripheral>
+    <peripheral derivedFrom="GLOBAL_EGU00_NS">
+      <name>GLOBAL_EGU00_S</name>
+      <description>Event generator unit 1</description>
+      <baseAddress>0x50058000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>EGU00</name>
+        <value>88</value>
+      </interrupt>
+    </peripheral>
     <peripheral>
-      <name>GLOBAL_CRACEN</name>
+      <name>GLOBAL_CRACEN_S</name>
       <description>CRACEN</description>
       <baseAddress>0x50059000</baseAddress>
+      <headerStructName>CRACEN</headerStructName>
       <!--Security dma=NSA-->
       <!--Security securemapping=S-->
       <addressBlock>
@@ -68328,6 +68621,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>CRACEN</name>
+        <value>89</value>
+      </interrupt>
       <groupName>CRACEN</groupName>
       <size>0x20</size>
       <registers>
@@ -68903,9 +69200,10 @@ POSSIBILITY OF SUCH DAMAGE.
       </registers>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_USBHS</name>
-      <description>USBHS</description>
-      <baseAddress>0x5005A000</baseAddress>
+      <name>GLOBAL_USBHS_NS</name>
+      <description>USBHS 0</description>
+      <baseAddress>0x4005A000</baseAddress>
+      <headerStructName>USBHS</headerStructName>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <addressBlock>
@@ -68913,6 +69211,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>USBHS</name>
+        <value>90</value>
+      </interrupt>
       <groupName>USBHS</groupName>
       <size>0x20</size>
       <registers>
@@ -69476,10 +69778,21 @@ POSSIBILITY OF SUCH DAMAGE.
         </cluster>
       </registers>
     </peripheral>
+    <peripheral derivedFrom="GLOBAL_USBHS_NS">
+      <name>GLOBAL_USBHS_S</name>
+      <description>USBHS 1</description>
+      <baseAddress>0x5005A000</baseAddress>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>USBHS</name>
+        <value>90</value>
+      </interrupt>
+    </peripheral>
     <peripheral>
-      <name>GLOBAL_MSPI00</name>
+      <name>GLOBAL_MSPI00_NS</name>
       <description>Multi serial peripheral interface 0</description>
-      <baseAddress>0x5005B000</baseAddress>
+      <baseAddress>0x4005B000</baseAddress>
       <headerStructName>MSPI</headerStructName>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
@@ -69488,6 +69801,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>MSPI00</name>
+        <value>91</value>
+      </interrupt>
       <groupName>MSPI</groupName>
       <size>0x20</size>
       <registers>
@@ -79266,16 +79583,65 @@ POSSIBILITY OF SUCH DAMAGE.
         </cluster>
       </registers>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_MSPI00">
-      <name>GLOBAL_MSPI01</name>
+    <peripheral derivedFrom="GLOBAL_MSPI00_NS">
+      <name>GLOBAL_MSPI00_S</name>
       <description>Multi serial peripheral interface 1</description>
+      <baseAddress>0x5005B000</baseAddress>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>MSPI00</name>
+        <value>91</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_MSPI00_NS">
+      <name>GLOBAL_MSPI01_NS</name>
+      <description>Multi serial peripheral interface 2</description>
+      <baseAddress>0x4005C000</baseAddress>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>MSPI01</name>
+        <value>92</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_MSPI00_NS">
+      <name>GLOBAL_MSPI01_S</name>
+      <description>Multi serial peripheral interface 3</description>
       <baseAddress>0x5005C000</baseAddress>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
+      <interrupt>
+        <name>MSPI01</name>
+        <value>92</value>
+      </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_SPIM00">
-      <name>GLOBAL_SPIM01</name>
-      <description>Serial Peripheral Interface Master with EasyDMA 1</description>
+    <peripheral derivedFrom="GLOBAL_SPIM00_NS">
+      <name>GLOBAL_SPIM01_NS</name>
+      <description>Serial Peripheral Interface Master with EasyDMA 2</description>
+      <baseAddress>0x4005D000</baseAddress>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL01</name>
+        <value>93</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_SPIS00_NS">
+      <name>GLOBAL_SPIS01_NS</name>
+      <description>SPI Slave 2</description>
+      <baseAddress>0x4005D000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM01_NS</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL01</name>
+        <value>93</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_SPIM00_NS">
+      <name>GLOBAL_SPIM01_S</name>
+      <description>Serial Peripheral Interface Master with EasyDMA 3</description>
       <baseAddress>0x5005D000</baseAddress>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
@@ -79284,11 +79650,11 @@ POSSIBILITY OF SUCH DAMAGE.
         <value>93</value>
       </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_SPIS00">
-      <name>GLOBAL_SPIS01</name>
-      <description>SPI Slave 1</description>
+    <peripheral derivedFrom="GLOBAL_SPIS00_NS">
+      <name>GLOBAL_SPIS01_S</name>
+      <description>SPI Slave 3</description>
       <baseAddress>0x5005D000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPIM01</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM01_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -79296,53 +79662,110 @@ POSSIBILITY OF SUCH DAMAGE.
         <value>93</value>
       </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_SPU00">
-      <name>GLOBAL_SPU10</name>
+    <peripheral derivedFrom="GLOBAL_SPU00_S">
+      <name>GLOBAL_SPU10_S</name>
       <description>System protection unit 1</description>
       <baseAddress>0x50080000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=S-->
+      <interrupt>
+        <name>SPU10</name>
+        <value>128</value>
+      </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_DPPIC00">
-      <name>GLOBAL_DPPIC10</name>
-      <description>Distributed programmable peripheral interconnect controller 1</description>
+    <peripheral derivedFrom="GLOBAL_DPPIC00_NS">
+      <name>GLOBAL_DPPIC10_NS</name>
+      <description>Distributed programmable peripheral interconnect controller 2</description>
+      <baseAddress>0x40082000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <!--Split access-->
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_DPPIC00_NS">
+      <name>GLOBAL_DPPIC10_S</name>
+      <description>Distributed programmable peripheral interconnect controller 3</description>
       <baseAddress>0x50082000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <!--Split access-->
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_PPIB00">
-      <name>GLOBAL_PPIB10</name>
-      <description>PPIB APB registers 2</description>
+    <peripheral derivedFrom="GLOBAL_PPIB00_NS">
+      <name>GLOBAL_PPIB10_NS</name>
+      <description>PPIB APB registers 4</description>
+      <baseAddress>0x40083000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_PPIB00_NS">
+      <name>GLOBAL_PPIB10_S</name>
+      <description>PPIB APB registers 5</description>
       <baseAddress>0x50083000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_PPIB00">
-      <name>GLOBAL_PPIB11</name>
-      <description>PPIB APB registers 3</description>
+    <peripheral derivedFrom="GLOBAL_PPIB00_NS">
+      <name>GLOBAL_PPIB11_NS</name>
+      <description>PPIB APB registers 6</description>
+      <baseAddress>0x40084000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_PPIB00_NS">
+      <name>GLOBAL_PPIB11_S</name>
+      <description>PPIB APB registers 7</description>
       <baseAddress>0x50084000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_TIMER00">
-      <name>GLOBAL_TIMER10</name>
-      <description>Timer/Counter 1</description>
+    <peripheral derivedFrom="GLOBAL_TIMER00_NS">
+      <name>GLOBAL_TIMER10_NS</name>
+      <description>Timer/Counter 2</description>
+      <baseAddress>0x40085000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>TIMER10</name>
+        <value>133</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_TIMER00_NS">
+      <name>GLOBAL_TIMER10_S</name>
+      <description>Timer/Counter 3</description>
       <baseAddress>0x50085000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
+      <interrupt>
+        <name>TIMER10</name>
+        <value>133</value>
+      </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_EGU00">
-      <name>GLOBAL_EGU10</name>
-      <description>Event generator unit 1</description>
+    <peripheral derivedFrom="GLOBAL_EGU00_NS">
+      <name>GLOBAL_EGU10_NS</name>
+      <description>Event generator unit 2</description>
+      <baseAddress>0x40087000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>EGU10</name>
+        <value>135</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_EGU00_NS">
+      <name>GLOBAL_EGU10_S</name>
+      <description>Event generator unit 3</description>
       <baseAddress>0x50087000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
+      <interrupt>
+        <name>EGU10</name>
+        <value>135</value>
+      </interrupt>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_RADIO</name>
-      <description>2.4 GHz radio</description>
-      <baseAddress>0x5008A000</baseAddress>
+      <name>GLOBAL_RADIO_NS</name>
+      <description>2.4 GHz radio 0</description>
+      <baseAddress>0x4008A000</baseAddress>
+      <headerStructName>RADIO</headerStructName>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <addressBlock>
@@ -79350,6 +79773,14 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x2000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>RADIO_0</name>
+        <value>138</value>
+      </interrupt>
+      <interrupt>
+        <name>RADIO_1</name>
+        <value>139</value>
+      </interrupt>
       <groupName>RADIO</groupName>
       <size>0x20</size>
       <registers>
@@ -88256,10 +88687,25 @@ POSSIBILITY OF SUCH DAMAGE.
         </cluster>
       </registers>
     </peripheral>
+    <peripheral derivedFrom="GLOBAL_RADIO_NS">
+      <name>GLOBAL_RADIO_S</name>
+      <description>2.4 GHz radio 1</description>
+      <baseAddress>0x5008A000</baseAddress>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>RADIO_0</name>
+        <value>138</value>
+      </interrupt>
+      <interrupt>
+        <name>RADIO_1</name>
+        <value>139</value>
+      </interrupt>
+    </peripheral>
     <peripheral>
-      <name>GLOBAL_IPCT10</name>
-      <description>IPCT APB registers</description>
-      <baseAddress>0x5008D000</baseAddress>
+      <name>GLOBAL_IPCT10_NS</name>
+      <description>IPCT APB registers 0</description>
+      <baseAddress>0x4008D000</baseAddress>
       <headerStructName>IPCT</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
@@ -88268,6 +88714,22 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>IPCT10_0</name>
+        <value>141</value>
+      </interrupt>
+      <interrupt>
+        <name>IPCT10_1</name>
+        <value>142</value>
+      </interrupt>
+      <interrupt>
+        <name>IPCT10_2</name>
+        <value>143</value>
+      </interrupt>
+      <interrupt>
+        <name>IPCT10_3</name>
+        <value>144</value>
+      </interrupt>
       <groupName>IPCT</groupName>
       <size>0x20</size>
       <registers>
@@ -91838,46 +92300,102 @@ POSSIBILITY OF SUCH DAMAGE.
         </cluster>
       </registers>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_SPU00">
-      <name>GLOBAL_SPU20</name>
+    <peripheral derivedFrom="GLOBAL_IPCT10_NS">
+      <name>GLOBAL_IPCT10_S</name>
+      <description>IPCT APB registers 1</description>
+      <baseAddress>0x5008D000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>IPCT10_0</name>
+        <value>141</value>
+      </interrupt>
+      <interrupt>
+        <name>IPCT10_1</name>
+        <value>142</value>
+      </interrupt>
+      <interrupt>
+        <name>IPCT10_2</name>
+        <value>143</value>
+      </interrupt>
+      <interrupt>
+        <name>IPCT10_3</name>
+        <value>144</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_SPU00_S">
+      <name>GLOBAL_SPU20_S</name>
       <description>System protection unit 2</description>
       <baseAddress>0x500C0000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=S-->
+      <interrupt>
+        <name>SPU20</name>
+        <value>192</value>
+      </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_DPPIC00">
-      <name>GLOBAL_DPPIC20</name>
-      <description>Distributed programmable peripheral interconnect controller 2</description>
+    <peripheral derivedFrom="GLOBAL_DPPIC00_NS">
+      <name>GLOBAL_DPPIC20_NS</name>
+      <description>Distributed programmable peripheral interconnect controller 4</description>
+      <baseAddress>0x400C2000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <!--Split access-->
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_DPPIC00_NS">
+      <name>GLOBAL_DPPIC20_S</name>
+      <description>Distributed programmable peripheral interconnect controller 5</description>
       <baseAddress>0x500C2000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <!--Split access-->
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_PPIB00">
-      <name>GLOBAL_PPIB20</name>
-      <description>PPIB APB registers 4</description>
+    <peripheral derivedFrom="GLOBAL_PPIB00_NS">
+      <name>GLOBAL_PPIB20_NS</name>
+      <description>PPIB APB registers 8</description>
+      <baseAddress>0x400C3000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_PPIB00_NS">
+      <name>GLOBAL_PPIB20_S</name>
+      <description>PPIB APB registers 9</description>
       <baseAddress>0x500C3000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_PPIB00">
-      <name>GLOBAL_PPIB21</name>
-      <description>PPIB APB registers 5</description>
+    <peripheral derivedFrom="GLOBAL_PPIB00_NS">
+      <name>GLOBAL_PPIB21_NS</name>
+      <description>PPIB APB registers 10</description>
+      <baseAddress>0x400C4000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_PPIB00_NS">
+      <name>GLOBAL_PPIB21_S</name>
+      <description>PPIB APB registers 11</description>
       <baseAddress>0x500C4000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_PPIB00">
-      <name>GLOBAL_PPIB22</name>
-      <description>PPIB APB registers 6</description>
+    <peripheral derivedFrom="GLOBAL_PPIB00_NS">
+      <name>GLOBAL_PPIB22_NS</name>
+      <description>PPIB APB registers 12</description>
+      <baseAddress>0x400C5000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_PPIB00_NS">
+      <name>GLOBAL_PPIB22_S</name>
+      <description>PPIB APB registers 13</description>
       <baseAddress>0x500C5000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_SPIM00">
-      <name>GLOBAL_SPIM20</name>
-      <description>Serial Peripheral Interface Master with EasyDMA 2</description>
-      <baseAddress>0x500C6000</baseAddress>
+    <peripheral derivedFrom="GLOBAL_SPIM00_NS">
+      <name>GLOBAL_SPIM20_NS</name>
+      <description>Serial Peripheral Interface Master with EasyDMA 4</description>
+      <baseAddress>0x400C6000</baseAddress>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -91885,11 +92403,11 @@ POSSIBILITY OF SUCH DAMAGE.
         <value>198</value>
       </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_SPIS00">
-      <name>GLOBAL_SPIS20</name>
-      <description>SPI Slave 2</description>
-      <baseAddress>0x500C6000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPIM20</alternatePeripheral>
+    <peripheral derivedFrom="GLOBAL_SPIS00_NS">
+      <name>GLOBAL_SPIS20_NS</name>
+      <description>SPI Slave 4</description>
+      <baseAddress>0x400C6000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM20_NS</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -91898,10 +92416,10 @@ POSSIBILITY OF SUCH DAMAGE.
       </interrupt>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_TWIM20</name>
+      <name>GLOBAL_TWIM20_NS</name>
       <description>I2C compatible Two-Wire Master Interface with EasyDMA 0</description>
-      <baseAddress>0x500C6000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPIM20</alternatePeripheral>
+      <baseAddress>0x400C6000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM20_NS</alternatePeripheral>
       <headerStructName>TWIM</headerStructName>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
@@ -95301,10 +95819,10 @@ POSSIBILITY OF SUCH DAMAGE.
       </registers>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_TWIS20</name>
+      <name>GLOBAL_TWIS20_NS</name>
       <description>I2C compatible Two-Wire Slave Interface with EasyDMA 0</description>
-      <baseAddress>0x500C6000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPIM20</alternatePeripheral>
+      <baseAddress>0x400C6000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM20_NS</alternatePeripheral>
       <headerStructName>TWIS</headerStructName>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
@@ -98435,11 +98953,11 @@ POSSIBILITY OF SUCH DAMAGE.
         </cluster>
       </registers>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_UARTE00">
-      <name>GLOBAL_UARTE20</name>
-      <description>UART with EasyDMA 1</description>
-      <baseAddress>0x500C6000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPIM20</alternatePeripheral>
+    <peripheral derivedFrom="GLOBAL_UARTE00_NS">
+      <name>GLOBAL_UARTE20_NS</name>
+      <description>UART with EasyDMA 2</description>
+      <baseAddress>0x400C6000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM20_NS</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -98447,117 +98965,187 @@ POSSIBILITY OF SUCH DAMAGE.
         <value>198</value>
       </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_SPIM00">
-      <name>GLOBAL_SPIM21</name>
-      <description>Serial Peripheral Interface Master with EasyDMA 3</description>
-      <baseAddress>0x500C7000</baseAddress>
+    <peripheral derivedFrom="GLOBAL_SPIM00_NS">
+      <name>GLOBAL_SPIM20_S</name>
+      <description>Serial Peripheral Interface Master with EasyDMA 5</description>
+      <baseAddress>0x500C6000</baseAddress>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>SERIAL21</name>
-        <value>199</value>
+        <name>SERIAL20</name>
+        <value>198</value>
       </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_SPIS00">
-      <name>GLOBAL_SPIS21</name>
-      <description>SPI Slave 3</description>
-      <baseAddress>0x500C7000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPIM21</alternatePeripheral>
+    <peripheral derivedFrom="GLOBAL_SPIS00_NS">
+      <name>GLOBAL_SPIS20_S</name>
+      <description>SPI Slave 5</description>
+      <baseAddress>0x500C6000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM20_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>SERIAL21</name>
-        <value>199</value>
+        <name>SERIAL20</name>
+        <value>198</value>
       </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_TWIM20">
-      <name>GLOBAL_TWIM21</name>
+    <peripheral derivedFrom="GLOBAL_TWIM20_NS">
+      <name>GLOBAL_TWIM20_S</name>
       <description>I2C compatible Two-Wire Master Interface with EasyDMA 1</description>
-      <baseAddress>0x500C7000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPIM21</alternatePeripheral>
+      <baseAddress>0x500C6000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM20_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>SERIAL21</name>
-        <value>199</value>
+        <name>SERIAL20</name>
+        <value>198</value>
       </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_TWIS20">
-      <name>GLOBAL_TWIS21</name>
+    <peripheral derivedFrom="GLOBAL_TWIS20_NS">
+      <name>GLOBAL_TWIS20_S</name>
       <description>I2C compatible Two-Wire Slave Interface with EasyDMA 1</description>
-      <baseAddress>0x500C7000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPIM21</alternatePeripheral>
+      <baseAddress>0x500C6000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM20_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>SERIAL21</name>
-        <value>199</value>
+        <name>SERIAL20</name>
+        <value>198</value>
       </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_UARTE00">
-      <name>GLOBAL_UARTE21</name>
-      <description>UART with EasyDMA 2</description>
-      <baseAddress>0x500C7000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPIM21</alternatePeripheral>
-      <!--Security dma=SA-->
-      <!--Security securemapping=US-->
-      <interrupt>
-        <name>SERIAL21</name>
-        <value>199</value>
-      </interrupt>
-    </peripheral>
-    <peripheral derivedFrom="GLOBAL_SPIM00">
-      <name>GLOBAL_SPIM22</name>
-      <description>Serial Peripheral Interface Master with EasyDMA 4</description>
-      <baseAddress>0x500C8000</baseAddress>
-      <!--Security dma=SA-->
-      <!--Security securemapping=US-->
-      <interrupt>
-        <name>SERIAL22</name>
-        <value>200</value>
-      </interrupt>
-    </peripheral>
-    <peripheral derivedFrom="GLOBAL_SPIS00">
-      <name>GLOBAL_SPIS22</name>
-      <description>SPI Slave 4</description>
-      <baseAddress>0x500C8000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPIM22</alternatePeripheral>
-      <!--Security dma=SA-->
-      <!--Security securemapping=US-->
-      <interrupt>
-        <name>SERIAL22</name>
-        <value>200</value>
-      </interrupt>
-    </peripheral>
-    <peripheral derivedFrom="GLOBAL_TWIM20">
-      <name>GLOBAL_TWIM22</name>
-      <description>I2C compatible Two-Wire Master Interface with EasyDMA 2</description>
-      <baseAddress>0x500C8000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPIM22</alternatePeripheral>
-      <!--Security dma=SA-->
-      <!--Security securemapping=US-->
-      <interrupt>
-        <name>SERIAL22</name>
-        <value>200</value>
-      </interrupt>
-    </peripheral>
-    <peripheral derivedFrom="GLOBAL_TWIS20">
-      <name>GLOBAL_TWIS22</name>
-      <description>I2C compatible Two-Wire Slave Interface with EasyDMA 2</description>
-      <baseAddress>0x500C8000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPIM22</alternatePeripheral>
-      <!--Security dma=SA-->
-      <!--Security securemapping=US-->
-      <interrupt>
-        <name>SERIAL22</name>
-        <value>200</value>
-      </interrupt>
-    </peripheral>
-    <peripheral derivedFrom="GLOBAL_UARTE00">
-      <name>GLOBAL_UARTE22</name>
+    <peripheral derivedFrom="GLOBAL_UARTE00_NS">
+      <name>GLOBAL_UARTE20_S</name>
       <description>UART with EasyDMA 3</description>
-      <baseAddress>0x500C8000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPIM22</alternatePeripheral>
+      <baseAddress>0x500C6000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM20_S</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL20</name>
+        <value>198</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_SPIM00_NS">
+      <name>GLOBAL_SPIM21_NS</name>
+      <description>Serial Peripheral Interface Master with EasyDMA 6</description>
+      <baseAddress>0x400C7000</baseAddress>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL21</name>
+        <value>199</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_SPIS00_NS">
+      <name>GLOBAL_SPIS21_NS</name>
+      <description>SPI Slave 6</description>
+      <baseAddress>0x400C7000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM21_NS</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL21</name>
+        <value>199</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_TWIM20_NS">
+      <name>GLOBAL_TWIM21_NS</name>
+      <description>I2C compatible Two-Wire Master Interface with EasyDMA 2</description>
+      <baseAddress>0x400C7000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM21_NS</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL21</name>
+        <value>199</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_TWIS20_NS">
+      <name>GLOBAL_TWIS21_NS</name>
+      <description>I2C compatible Two-Wire Slave Interface with EasyDMA 2</description>
+      <baseAddress>0x400C7000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM21_NS</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL21</name>
+        <value>199</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_UARTE00_NS">
+      <name>GLOBAL_UARTE21_NS</name>
+      <description>UART with EasyDMA 4</description>
+      <baseAddress>0x400C7000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM21_NS</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL21</name>
+        <value>199</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_SPIM00_NS">
+      <name>GLOBAL_SPIM21_S</name>
+      <description>Serial Peripheral Interface Master with EasyDMA 7</description>
+      <baseAddress>0x500C7000</baseAddress>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL21</name>
+        <value>199</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_SPIS00_NS">
+      <name>GLOBAL_SPIS21_S</name>
+      <description>SPI Slave 7</description>
+      <baseAddress>0x500C7000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM21_S</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL21</name>
+        <value>199</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_TWIM20_NS">
+      <name>GLOBAL_TWIM21_S</name>
+      <description>I2C compatible Two-Wire Master Interface with EasyDMA 3</description>
+      <baseAddress>0x500C7000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM21_S</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL21</name>
+        <value>199</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_TWIS20_NS">
+      <name>GLOBAL_TWIS21_S</name>
+      <description>I2C compatible Two-Wire Slave Interface with EasyDMA 3</description>
+      <baseAddress>0x500C7000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM21_S</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL21</name>
+        <value>199</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_UARTE00_NS">
+      <name>GLOBAL_UARTE21_S</name>
+      <description>UART with EasyDMA 5</description>
+      <baseAddress>0x500C7000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM21_S</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL21</name>
+        <value>199</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_SPIM00_NS">
+      <name>GLOBAL_SPIM22_NS</name>
+      <description>Serial Peripheral Interface Master with EasyDMA 8</description>
+      <baseAddress>0x400C8000</baseAddress>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -98565,52 +99153,250 @@ POSSIBILITY OF SUCH DAMAGE.
         <value>200</value>
       </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_EGU00">
-      <name>GLOBAL_EGU20</name>
-      <description>Event generator unit 2</description>
+    <peripheral derivedFrom="GLOBAL_SPIS00_NS">
+      <name>GLOBAL_SPIS22_NS</name>
+      <description>SPI Slave 8</description>
+      <baseAddress>0x400C8000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM22_NS</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL22</name>
+        <value>200</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_TWIM20_NS">
+      <name>GLOBAL_TWIM22_NS</name>
+      <description>I2C compatible Two-Wire Master Interface with EasyDMA 4</description>
+      <baseAddress>0x400C8000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM22_NS</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL22</name>
+        <value>200</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_TWIS20_NS">
+      <name>GLOBAL_TWIS22_NS</name>
+      <description>I2C compatible Two-Wire Slave Interface with EasyDMA 4</description>
+      <baseAddress>0x400C8000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM22_NS</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL22</name>
+        <value>200</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_UARTE00_NS">
+      <name>GLOBAL_UARTE22_NS</name>
+      <description>UART with EasyDMA 6</description>
+      <baseAddress>0x400C8000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM22_NS</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL22</name>
+        <value>200</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_SPIM00_NS">
+      <name>GLOBAL_SPIM22_S</name>
+      <description>Serial Peripheral Interface Master with EasyDMA 9</description>
+      <baseAddress>0x500C8000</baseAddress>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL22</name>
+        <value>200</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_SPIS00_NS">
+      <name>GLOBAL_SPIS22_S</name>
+      <description>SPI Slave 9</description>
+      <baseAddress>0x500C8000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM22_S</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL22</name>
+        <value>200</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_TWIM20_NS">
+      <name>GLOBAL_TWIM22_S</name>
+      <description>I2C compatible Two-Wire Master Interface with EasyDMA 5</description>
+      <baseAddress>0x500C8000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM22_S</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL22</name>
+        <value>200</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_TWIS20_NS">
+      <name>GLOBAL_TWIS22_S</name>
+      <description>I2C compatible Two-Wire Slave Interface with EasyDMA 5</description>
+      <baseAddress>0x500C8000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM22_S</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL22</name>
+        <value>200</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_UARTE00_NS">
+      <name>GLOBAL_UARTE22_S</name>
+      <description>UART with EasyDMA 7</description>
+      <baseAddress>0x500C8000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM22_S</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL22</name>
+        <value>200</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_EGU00_NS">
+      <name>GLOBAL_EGU20_NS</name>
+      <description>Event generator unit 4</description>
+      <baseAddress>0x400C9000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>EGU20</name>
+        <value>201</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_EGU00_NS">
+      <name>GLOBAL_EGU20_S</name>
+      <description>Event generator unit 5</description>
       <baseAddress>0x500C9000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
+      <interrupt>
+        <name>EGU20</name>
+        <value>201</value>
+      </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_TIMER00">
-      <name>GLOBAL_TIMER20</name>
-      <description>Timer/Counter 2</description>
+    <peripheral derivedFrom="GLOBAL_TIMER00_NS">
+      <name>GLOBAL_TIMER20_NS</name>
+      <description>Timer/Counter 4</description>
+      <baseAddress>0x400CA000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>TIMER20</name>
+        <value>202</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_TIMER00_NS">
+      <name>GLOBAL_TIMER20_S</name>
+      <description>Timer/Counter 5</description>
       <baseAddress>0x500CA000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
+      <interrupt>
+        <name>TIMER20</name>
+        <value>202</value>
+      </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_TIMER00">
-      <name>GLOBAL_TIMER21</name>
-      <description>Timer/Counter 3</description>
+    <peripheral derivedFrom="GLOBAL_TIMER00_NS">
+      <name>GLOBAL_TIMER21_NS</name>
+      <description>Timer/Counter 6</description>
+      <baseAddress>0x400CB000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>TIMER21</name>
+        <value>203</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_TIMER00_NS">
+      <name>GLOBAL_TIMER21_S</name>
+      <description>Timer/Counter 7</description>
       <baseAddress>0x500CB000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
+      <interrupt>
+        <name>TIMER21</name>
+        <value>203</value>
+      </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_TIMER00">
-      <name>GLOBAL_TIMER22</name>
-      <description>Timer/Counter 4</description>
+    <peripheral derivedFrom="GLOBAL_TIMER00_NS">
+      <name>GLOBAL_TIMER22_NS</name>
+      <description>Timer/Counter 8</description>
+      <baseAddress>0x400CC000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>TIMER22</name>
+        <value>204</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_TIMER00_NS">
+      <name>GLOBAL_TIMER22_S</name>
+      <description>Timer/Counter 9</description>
       <baseAddress>0x500CC000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
+      <interrupt>
+        <name>TIMER22</name>
+        <value>204</value>
+      </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_TIMER00">
-      <name>GLOBAL_TIMER23</name>
-      <description>Timer/Counter 5</description>
+    <peripheral derivedFrom="GLOBAL_TIMER00_NS">
+      <name>GLOBAL_TIMER23_NS</name>
+      <description>Timer/Counter 10</description>
+      <baseAddress>0x400CD000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>TIMER23</name>
+        <value>205</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_TIMER00_NS">
+      <name>GLOBAL_TIMER23_S</name>
+      <description>Timer/Counter 11</description>
       <baseAddress>0x500CD000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
+      <interrupt>
+        <name>TIMER23</name>
+        <value>205</value>
+      </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_TIMER00">
-      <name>GLOBAL_TIMER24</name>
-      <description>Timer/Counter 6</description>
+    <peripheral derivedFrom="GLOBAL_TIMER00_NS">
+      <name>GLOBAL_TIMER24_NS</name>
+      <description>Timer/Counter 12</description>
+      <baseAddress>0x400CE000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>TIMER24</name>
+        <value>206</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_TIMER00_NS">
+      <name>GLOBAL_TIMER24_S</name>
+      <description>Timer/Counter 13</description>
       <baseAddress>0x500CE000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
+      <interrupt>
+        <name>TIMER24</name>
+        <value>206</value>
+      </interrupt>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_MEMCONF</name>
-      <description>Memory configuration</description>
-      <baseAddress>0x500CF000</baseAddress>
+      <name>GLOBAL_MEMCONF_NS</name>
+      <description>Memory configuration 0</description>
+      <baseAddress>0x400CF000</baseAddress>
+      <headerStructName>MEMCONF</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <addressBlock>
@@ -100390,10 +101176,17 @@ POSSIBILITY OF SUCH DAMAGE.
         </cluster>
       </registers>
     </peripheral>
+    <peripheral derivedFrom="GLOBAL_MEMCONF_NS">
+      <name>GLOBAL_MEMCONF_S</name>
+      <description>Memory configuration 1</description>
+      <baseAddress>0x500CF000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+    </peripheral>
     <peripheral>
-      <name>GLOBAL_PDM20</name>
+      <name>GLOBAL_PDM20_NS</name>
       <description>Pulse Density Modulation (Digital Microphone) Interface 0</description>
-      <baseAddress>0x500D0000</baseAddress>
+      <baseAddress>0x400D0000</baseAddress>
       <headerStructName>PDM</headerStructName>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
@@ -100402,6 +101195,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>PDM20</name>
+        <value>208</value>
+      </interrupt>
       <groupName>PDM</groupName>
       <size>0x20</size>
       <registers>
@@ -102069,17 +102866,43 @@ POSSIBILITY OF SUCH DAMAGE.
         </cluster>
       </registers>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_PDM20">
-      <name>GLOBAL_PDM21</name>
+    <peripheral derivedFrom="GLOBAL_PDM20_NS">
+      <name>GLOBAL_PDM20_S</name>
       <description>Pulse Density Modulation (Digital Microphone) Interface 1</description>
+      <baseAddress>0x500D0000</baseAddress>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>PDM20</name>
+        <value>208</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_PDM20_NS">
+      <name>GLOBAL_PDM21_NS</name>
+      <description>Pulse Density Modulation (Digital Microphone) Interface 2</description>
+      <baseAddress>0x400D1000</baseAddress>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>PDM21</name>
+        <value>209</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_PDM20_NS">
+      <name>GLOBAL_PDM21_S</name>
+      <description>Pulse Density Modulation (Digital Microphone) Interface 3</description>
       <baseAddress>0x500D1000</baseAddress>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
+      <interrupt>
+        <name>PDM21</name>
+        <value>209</value>
+      </interrupt>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_PWM20</name>
+      <name>GLOBAL_PWM20_NS</name>
       <description>Pulse width modulation unit 0</description>
-      <baseAddress>0x500D2000</baseAddress>
+      <baseAddress>0x400D2000</baseAddress>
       <headerStructName>PWM</headerStructName>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
@@ -102088,6 +102911,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>PWM20</name>
+        <value>210</value>
+      </interrupt>
       <groupName>PWM</groupName>
       <size>0x20</size>
       <registers>
@@ -105333,24 +106160,66 @@ POSSIBILITY OF SUCH DAMAGE.
         </cluster>
       </registers>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_PWM20">
-      <name>GLOBAL_PWM21</name>
+    <peripheral derivedFrom="GLOBAL_PWM20_NS">
+      <name>GLOBAL_PWM20_S</name>
       <description>Pulse width modulation unit 1</description>
+      <baseAddress>0x500D2000</baseAddress>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>PWM20</name>
+        <value>210</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_PWM20_NS">
+      <name>GLOBAL_PWM21_NS</name>
+      <description>Pulse width modulation unit 2</description>
+      <baseAddress>0x400D3000</baseAddress>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>PWM21</name>
+        <value>211</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_PWM20_NS">
+      <name>GLOBAL_PWM21_S</name>
+      <description>Pulse width modulation unit 3</description>
       <baseAddress>0x500D3000</baseAddress>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
+      <interrupt>
+        <name>PWM21</name>
+        <value>211</value>
+      </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_PWM20">
-      <name>GLOBAL_PWM22</name>
-      <description>Pulse width modulation unit 2</description>
+    <peripheral derivedFrom="GLOBAL_PWM20_NS">
+      <name>GLOBAL_PWM22_NS</name>
+      <description>Pulse width modulation unit 4</description>
+      <baseAddress>0x400D4000</baseAddress>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>PWM22</name>
+        <value>212</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_PWM20_NS">
+      <name>GLOBAL_PWM22_S</name>
+      <description>Pulse width modulation unit 5</description>
       <baseAddress>0x500D4000</baseAddress>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
+      <interrupt>
+        <name>PWM22</name>
+        <value>212</value>
+      </interrupt>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_SAADC</name>
-      <description>Analog to Digital Converter</description>
-      <baseAddress>0x500D5000</baseAddress>
+      <name>GLOBAL_SAADC_NS</name>
+      <description>Analog to Digital Converter 0</description>
+      <baseAddress>0x400D5000</baseAddress>
+      <headerStructName>SAADC</headerStructName>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <addressBlock>
@@ -105358,6 +106227,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>SAADC</name>
+        <value>213</value>
+      </interrupt>
       <groupName>SAADC</groupName>
       <size>0x20</size>
       <registers>
@@ -108459,10 +109332,22 @@ POSSIBILITY OF SUCH DAMAGE.
         </register>
       </registers>
     </peripheral>
+    <peripheral derivedFrom="GLOBAL_SAADC_NS">
+      <name>GLOBAL_SAADC_S</name>
+      <description>Analog to Digital Converter 1</description>
+      <baseAddress>0x500D5000</baseAddress>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SAADC</name>
+        <value>213</value>
+      </interrupt>
+    </peripheral>
     <peripheral>
-      <name>GLOBAL_NFCT</name>
-      <description>NFC-A compatible radio NFC-A compatible radio</description>
-      <baseAddress>0x500D6000</baseAddress>
+      <name>GLOBAL_NFCT_NS</name>
+      <description>NFC-A compatible radio NFC-A compatible radio 0</description>
+      <baseAddress>0x400D6000</baseAddress>
+      <headerStructName>NFCT</headerStructName>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <addressBlock>
@@ -108470,6 +109355,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>NFCT</name>
+        <value>214</value>
+      </interrupt>
       <groupName>NFCT</groupName>
       <size>0x20</size>
       <registers>
@@ -111954,10 +112843,22 @@ POSSIBILITY OF SUCH DAMAGE.
         </register>
       </registers>
     </peripheral>
+    <peripheral derivedFrom="GLOBAL_NFCT_NS">
+      <name>GLOBAL_NFCT_S</name>
+      <description>NFC-A compatible radio NFC-A compatible radio 1</description>
+      <baseAddress>0x500D6000</baseAddress>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>NFCT</name>
+        <value>214</value>
+      </interrupt>
+    </peripheral>
     <peripheral>
-      <name>GLOBAL_TEMP</name>
-      <description>Temperature Sensor</description>
-      <baseAddress>0x500D7000</baseAddress>
+      <name>GLOBAL_TEMP_NS</name>
+      <description>Temperature Sensor 0</description>
+      <baseAddress>0x400D7000</baseAddress>
+      <headerStructName>TEMP</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <addressBlock>
@@ -111965,6 +112866,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>TEMP</name>
+        <value>215</value>
+      </interrupt>
       <groupName>TEMP</groupName>
       <size>0x20</size>
       <registers>
@@ -112556,34 +113461,69 @@ POSSIBILITY OF SUCH DAMAGE.
         </register>
       </registers>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_P2">
-      <name>GLOBAL_P1</name>
-      <description>GPIO Port 1</description>
+    <peripheral derivedFrom="GLOBAL_TEMP_NS">
+      <name>GLOBAL_TEMP_S</name>
+      <description>Temperature Sensor 1</description>
+      <baseAddress>0x500D7000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>TEMP</name>
+        <value>215</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_P2_NS">
+      <name>GLOBAL_P1_NS</name>
+      <description>GPIO Port 2</description>
+      <baseAddress>0x400D8200</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <!--Split access-->
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_P2_NS">
+      <name>GLOBAL_P3_NS</name>
+      <description>GPIO Port 3</description>
+      <baseAddress>0x400D8600</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <!--Split access-->
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_P2_NS">
+      <name>GLOBAL_P4_NS</name>
+      <description>GPIO Port 4</description>
+      <baseAddress>0x400D8800</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <!--Split access-->
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_P2_NS">
+      <name>GLOBAL_P1_S</name>
+      <description>GPIO Port 5</description>
       <baseAddress>0x500D8200</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <!--Split access-->
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_P2">
-      <name>GLOBAL_P3</name>
-      <description>GPIO Port 2</description>
+    <peripheral derivedFrom="GLOBAL_P2_NS">
+      <name>GLOBAL_P3_S</name>
+      <description>GPIO Port 6</description>
       <baseAddress>0x500D8600</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <!--Split access-->
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_P2">
-      <name>GLOBAL_P4</name>
-      <description>GPIO Port 3</description>
+    <peripheral derivedFrom="GLOBAL_P2_NS">
+      <name>GLOBAL_P4_S</name>
+      <description>GPIO Port 7</description>
       <baseAddress>0x500D8800</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <!--Split access-->
     </peripheral>
     <peripheral>
-      <name>GLOBAL_GPIOTE20</name>
+      <name>GLOBAL_GPIOTE20_NS</name>
       <description>GPIO Tasks and Events 0</description>
-      <baseAddress>0x500DA000</baseAddress>
+      <baseAddress>0x400DA000</baseAddress>
       <headerStructName>GPIOTE</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
@@ -112593,6 +113533,14 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>GPIOTE20_0</name>
+        <value>218</value>
+      </interrupt>
+      <interrupt>
+        <name>GPIOTE20_1</name>
+        <value>219</value>
+      </interrupt>
       <groupName>GPIOTE</groupName>
       <size>0x20</size>
       <registers>
@@ -114640,10 +115588,26 @@ POSSIBILITY OF SUCH DAMAGE.
         </register>
       </registers>
     </peripheral>
+    <peripheral derivedFrom="GLOBAL_GPIOTE20_NS">
+      <name>GLOBAL_GPIOTE20_S</name>
+      <description>GPIO Tasks and Events 1</description>
+      <baseAddress>0x500DA000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <!--Split access-->
+      <interrupt>
+        <name>GPIOTE20_0</name>
+        <value>218</value>
+      </interrupt>
+      <interrupt>
+        <name>GPIOTE20_1</name>
+        <value>219</value>
+      </interrupt>
+    </peripheral>
     <peripheral>
-      <name>GLOBAL_QDEC20</name>
+      <name>GLOBAL_QDEC20_NS</name>
       <description>Quadrature Decoder 0</description>
-      <baseAddress>0x500E0000</baseAddress>
+      <baseAddress>0x400E0000</baseAddress>
       <headerStructName>QDEC</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
@@ -114652,6 +115616,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>QDEC20</name>
+        <value>224</value>
+      </interrupt>
       <groupName>QDEC</groupName>
       <size>0x20</size>
       <registers>
@@ -116224,17 +117192,44 @@ POSSIBILITY OF SUCH DAMAGE.
         </register>
       </registers>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_QDEC20">
-      <name>GLOBAL_QDEC21</name>
+    <peripheral derivedFrom="GLOBAL_QDEC20_NS">
+      <name>GLOBAL_QDEC20_S</name>
       <description>Quadrature Decoder 1</description>
+      <baseAddress>0x500E0000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>QDEC20</name>
+        <value>224</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_QDEC20_NS">
+      <name>GLOBAL_QDEC21_NS</name>
+      <description>Quadrature Decoder 2</description>
+      <baseAddress>0x400E1000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>QDEC21</name>
+        <value>225</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_QDEC20_NS">
+      <name>GLOBAL_QDEC21_S</name>
+      <description>Quadrature Decoder 3</description>
       <baseAddress>0x500E1000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
+      <interrupt>
+        <name>QDEC21</name>
+        <value>225</value>
+      </interrupt>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_GRTC</name>
-      <description>Global Real-time counter</description>
-      <baseAddress>0x500E2000</baseAddress>
+      <name>GLOBAL_GRTC_NS</name>
+      <description>Global Real-time counter 0</description>
+      <baseAddress>0x400E2000</baseAddress>
+      <headerStructName>GRTC</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <!--Split access-->
@@ -116244,8 +117239,28 @@ POSSIBILITY OF SUCH DAMAGE.
         <usage>registers</usage>
       </addressBlock>
       <interrupt>
+        <name>GRTC_0</name>
+        <value>226</value>
+      </interrupt>
+      <interrupt>
+        <name>GRTC_1</name>
+        <value>227</value>
+      </interrupt>
+      <interrupt>
+        <name>GRTC_2</name>
+        <value>228</value>
+      </interrupt>
+      <interrupt>
+        <name>GRTC_3</name>
+        <value>229</value>
+      </interrupt>
+      <interrupt>
         <name>GRTC_4</name>
         <value>230</value>
+      </interrupt>
+      <interrupt>
+        <name>GRTC_5</name>
+        <value>231</value>
       </interrupt>
       <groupName>GRTC</groupName>
       <size>0x20</size>
@@ -128734,10 +129749,43 @@ POSSIBILITY OF SUCH DAMAGE.
         </cluster>
       </registers>
     </peripheral>
+    <peripheral derivedFrom="GLOBAL_GRTC_NS">
+      <name>GLOBAL_GRTC_S</name>
+      <description>Global Real-time counter 1</description>
+      <baseAddress>0x500E2000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <!--Split access-->
+      <interrupt>
+        <name>GRTC_0</name>
+        <value>226</value>
+      </interrupt>
+      <interrupt>
+        <name>GRTC_1</name>
+        <value>227</value>
+      </interrupt>
+      <interrupt>
+        <name>GRTC_2</name>
+        <value>228</value>
+      </interrupt>
+      <interrupt>
+        <name>GRTC_3</name>
+        <value>229</value>
+      </interrupt>
+      <interrupt>
+        <name>GRTC_4</name>
+        <value>230</value>
+      </interrupt>
+      <interrupt>
+        <name>GRTC_5</name>
+        <value>231</value>
+      </interrupt>
+    </peripheral>
     <peripheral>
-      <name>GLOBAL_TDM</name>
-      <description>Time division multiplexed audio interface</description>
-      <baseAddress>0x500E8000</baseAddress>
+      <name>GLOBAL_TDM_NS</name>
+      <description>Time division multiplexed audio interface 0</description>
+      <baseAddress>0x400E8000</baseAddress>
+      <headerStructName>TDM</headerStructName>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <addressBlock>
@@ -128745,6 +129793,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>TDM</name>
+        <value>232</value>
+      </interrupt>
       <groupName>TDM</groupName>
       <size>0x20</size>
       <registers>
@@ -131254,9 +132306,79 @@ POSSIBILITY OF SUCH DAMAGE.
         </cluster>
       </registers>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_SPIM00">
-      <name>GLOBAL_SPIM23</name>
-      <description>Serial Peripheral Interface Master with EasyDMA 5</description>
+    <peripheral derivedFrom="GLOBAL_TDM_NS">
+      <name>GLOBAL_TDM_S</name>
+      <description>Time division multiplexed audio interface 1</description>
+      <baseAddress>0x500E8000</baseAddress>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>TDM</name>
+        <value>232</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_SPIM00_NS">
+      <name>GLOBAL_SPIM23_NS</name>
+      <description>Serial Peripheral Interface Master with EasyDMA 10</description>
+      <baseAddress>0x400ED000</baseAddress>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL23</name>
+        <value>237</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_SPIS00_NS">
+      <name>GLOBAL_SPIS23_NS</name>
+      <description>SPI Slave 10</description>
+      <baseAddress>0x400ED000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM23_NS</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL23</name>
+        <value>237</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_TWIM20_NS">
+      <name>GLOBAL_TWIM23_NS</name>
+      <description>I2C compatible Two-Wire Master Interface with EasyDMA 6</description>
+      <baseAddress>0x400ED000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM23_NS</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL23</name>
+        <value>237</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_TWIS20_NS">
+      <name>GLOBAL_TWIS23_NS</name>
+      <description>I2C compatible Two-Wire Slave Interface with EasyDMA 6</description>
+      <baseAddress>0x400ED000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM23_NS</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL23</name>
+        <value>237</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_UARTE00_NS">
+      <name>GLOBAL_UARTE23_NS</name>
+      <description>UART with EasyDMA 8</description>
+      <baseAddress>0x400ED000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM23_NS</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL23</name>
+        <value>237</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_SPIM00_NS">
+      <name>GLOBAL_SPIM23_S</name>
+      <description>Serial Peripheral Interface Master with EasyDMA 11</description>
       <baseAddress>0x500ED000</baseAddress>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
@@ -131265,11 +132387,11 @@ POSSIBILITY OF SUCH DAMAGE.
         <value>237</value>
       </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_SPIS00">
-      <name>GLOBAL_SPIS23</name>
-      <description>SPI Slave 5</description>
+    <peripheral derivedFrom="GLOBAL_SPIS00_NS">
+      <name>GLOBAL_SPIS23_S</name>
+      <description>SPI Slave 11</description>
       <baseAddress>0x500ED000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPIM23</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM23_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -131277,11 +132399,11 @@ POSSIBILITY OF SUCH DAMAGE.
         <value>237</value>
       </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_TWIM20">
-      <name>GLOBAL_TWIM23</name>
-      <description>I2C compatible Two-Wire Master Interface with EasyDMA 3</description>
+    <peripheral derivedFrom="GLOBAL_TWIM20_NS">
+      <name>GLOBAL_TWIM23_S</name>
+      <description>I2C compatible Two-Wire Master Interface with EasyDMA 7</description>
       <baseAddress>0x500ED000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPIM23</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM23_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -131289,11 +132411,11 @@ POSSIBILITY OF SUCH DAMAGE.
         <value>237</value>
       </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_TWIS20">
-      <name>GLOBAL_TWIS23</name>
-      <description>I2C compatible Two-Wire Slave Interface with EasyDMA 3</description>
+    <peripheral derivedFrom="GLOBAL_TWIS20_NS">
+      <name>GLOBAL_TWIS23_S</name>
+      <description>I2C compatible Two-Wire Slave Interface with EasyDMA 7</description>
       <baseAddress>0x500ED000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPIM23</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM23_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -131301,11 +132423,11 @@ POSSIBILITY OF SUCH DAMAGE.
         <value>237</value>
       </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_UARTE00">
-      <name>GLOBAL_UARTE23</name>
-      <description>UART with EasyDMA 4</description>
+    <peripheral derivedFrom="GLOBAL_UARTE00_NS">
+      <name>GLOBAL_UARTE23_S</name>
+      <description>UART with EasyDMA 9</description>
       <baseAddress>0x500ED000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPIM23</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM23_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -131313,9 +132435,68 @@ POSSIBILITY OF SUCH DAMAGE.
         <value>237</value>
       </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_SPIM00">
-      <name>GLOBAL_SPIM24</name>
-      <description>Serial Peripheral Interface Master with EasyDMA 6</description>
+    <peripheral derivedFrom="GLOBAL_SPIM00_NS">
+      <name>GLOBAL_SPIM24_NS</name>
+      <description>Serial Peripheral Interface Master with EasyDMA 12</description>
+      <baseAddress>0x400EE000</baseAddress>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL24</name>
+        <value>238</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_SPIS00_NS">
+      <name>GLOBAL_SPIS24_NS</name>
+      <description>SPI Slave 12</description>
+      <baseAddress>0x400EE000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM24_NS</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL24</name>
+        <value>238</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_TWIM20_NS">
+      <name>GLOBAL_TWIM24_NS</name>
+      <description>I2C compatible Two-Wire Master Interface with EasyDMA 8</description>
+      <baseAddress>0x400EE000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM24_NS</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL24</name>
+        <value>238</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_TWIS20_NS">
+      <name>GLOBAL_TWIS24_NS</name>
+      <description>I2C compatible Two-Wire Slave Interface with EasyDMA 8</description>
+      <baseAddress>0x400EE000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM24_NS</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL24</name>
+        <value>238</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_UARTE00_NS">
+      <name>GLOBAL_UARTE24_NS</name>
+      <description>UART with EasyDMA 10</description>
+      <baseAddress>0x400EE000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM24_NS</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL24</name>
+        <value>238</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_SPIM00_NS">
+      <name>GLOBAL_SPIM24_S</name>
+      <description>Serial Peripheral Interface Master with EasyDMA 13</description>
       <baseAddress>0x500EE000</baseAddress>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
@@ -131324,11 +132505,11 @@ POSSIBILITY OF SUCH DAMAGE.
         <value>238</value>
       </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_SPIS00">
-      <name>GLOBAL_SPIS24</name>
-      <description>SPI Slave 6</description>
+    <peripheral derivedFrom="GLOBAL_SPIS00_NS">
+      <name>GLOBAL_SPIS24_S</name>
+      <description>SPI Slave 13</description>
       <baseAddress>0x500EE000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPIM24</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM24_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -131336,11 +132517,11 @@ POSSIBILITY OF SUCH DAMAGE.
         <value>238</value>
       </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_TWIM20">
-      <name>GLOBAL_TWIM24</name>
-      <description>I2C compatible Two-Wire Master Interface with EasyDMA 4</description>
+    <peripheral derivedFrom="GLOBAL_TWIM20_NS">
+      <name>GLOBAL_TWIM24_S</name>
+      <description>I2C compatible Two-Wire Master Interface with EasyDMA 9</description>
       <baseAddress>0x500EE000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPIM24</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM24_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -131348,11 +132529,11 @@ POSSIBILITY OF SUCH DAMAGE.
         <value>238</value>
       </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_TWIS20">
-      <name>GLOBAL_TWIS24</name>
-      <description>I2C compatible Two-Wire Slave Interface with EasyDMA 4</description>
+    <peripheral derivedFrom="GLOBAL_TWIS20_NS">
+      <name>GLOBAL_TWIS24_S</name>
+      <description>I2C compatible Two-Wire Slave Interface with EasyDMA 9</description>
       <baseAddress>0x500EE000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPIM24</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM24_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -131360,11 +132541,11 @@ POSSIBILITY OF SUCH DAMAGE.
         <value>238</value>
       </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_UARTE00">
-      <name>GLOBAL_UARTE24</name>
-      <description>UART with EasyDMA 5</description>
+    <peripheral derivedFrom="GLOBAL_UARTE00_NS">
+      <name>GLOBAL_UARTE24_S</name>
+      <description>UART with EasyDMA 11</description>
       <baseAddress>0x500EE000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPIM24</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM24_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -131373,9 +132554,10 @@ POSSIBILITY OF SUCH DAMAGE.
       </interrupt>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_TAMPC</name>
+      <name>GLOBAL_TAMPC_S</name>
       <description>Tamper controller</description>
       <baseAddress>0x500EF000</baseAddress>
+      <headerStructName>TAMPC</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=S-->
       <addressBlock>
@@ -131383,6 +132565,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>TAMPC</name>
+        <value>239</value>
+      </interrupt>
       <groupName>TAMPC</groupName>
       <size>0x20</size>
       <registers>
@@ -133652,9 +134838,10 @@ POSSIBILITY OF SUCH DAMAGE.
       </registers>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_COEXC</name>
-      <description>Coexistence controller</description>
-      <baseAddress>0x500F1000</baseAddress>
+      <name>GLOBAL_COEXC_NS</name>
+      <description>Coexistence controller 0</description>
+      <baseAddress>0x400F1000</baseAddress>
+      <headerStructName>COEXC</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <!--Split access-->
@@ -134588,31 +135775,117 @@ POSSIBILITY OF SUCH DAMAGE.
         </cluster>
       </registers>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_SPU00">
-      <name>GLOBAL_SPU30</name>
+    <peripheral derivedFrom="GLOBAL_COEXC_NS">
+      <name>GLOBAL_COEXC_S</name>
+      <description>Coexistence controller 1</description>
+      <baseAddress>0x500F1000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <!--Split access-->
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_SPU00_S">
+      <name>GLOBAL_SPU30_S</name>
       <description>System protection unit 3</description>
       <baseAddress>0x50100000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=S-->
+      <interrupt>
+        <name>SPU30</name>
+        <value>256</value>
+      </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_DPPIC00">
-      <name>GLOBAL_DPPIC30</name>
-      <description>Distributed programmable peripheral interconnect controller 3</description>
+    <peripheral derivedFrom="GLOBAL_DPPIC00_NS">
+      <name>GLOBAL_DPPIC30_NS</name>
+      <description>Distributed programmable peripheral interconnect controller 6</description>
+      <baseAddress>0x40102000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <!--Split access-->
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_DPPIC00_NS">
+      <name>GLOBAL_DPPIC30_S</name>
+      <description>Distributed programmable peripheral interconnect controller 7</description>
       <baseAddress>0x50102000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <!--Split access-->
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_PPIB00">
-      <name>GLOBAL_PPIB30</name>
-      <description>PPIB APB registers 7</description>
+    <peripheral derivedFrom="GLOBAL_PPIB00_NS">
+      <name>GLOBAL_PPIB30_NS</name>
+      <description>PPIB APB registers 14</description>
+      <baseAddress>0x40103000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_PPIB00_NS">
+      <name>GLOBAL_PPIB30_S</name>
+      <description>PPIB APB registers 15</description>
       <baseAddress>0x50103000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_SPIM00">
-      <name>GLOBAL_SPIM30</name>
-      <description>Serial Peripheral Interface Master with EasyDMA 7</description>
+    <peripheral derivedFrom="GLOBAL_SPIM00_NS">
+      <name>GLOBAL_SPIM30_NS</name>
+      <description>Serial Peripheral Interface Master with EasyDMA 14</description>
+      <baseAddress>0x40104000</baseAddress>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL30</name>
+        <value>260</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_SPIS00_NS">
+      <name>GLOBAL_SPIS30_NS</name>
+      <description>SPI Slave 14</description>
+      <baseAddress>0x40104000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM30_NS</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL30</name>
+        <value>260</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_TWIM20_NS">
+      <name>GLOBAL_TWIM30_NS</name>
+      <description>I2C compatible Two-Wire Master Interface with EasyDMA 10</description>
+      <baseAddress>0x40104000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM30_NS</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL30</name>
+        <value>260</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_TWIS20_NS">
+      <name>GLOBAL_TWIS30_NS</name>
+      <description>I2C compatible Two-Wire Slave Interface with EasyDMA 10</description>
+      <baseAddress>0x40104000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM30_NS</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL30</name>
+        <value>260</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_UARTE00_NS">
+      <name>GLOBAL_UARTE30_NS</name>
+      <description>UART with EasyDMA 12</description>
+      <baseAddress>0x40104000</baseAddress>
+      <alternatePeripheral>GLOBAL_SPIM30_NS</alternatePeripheral>
+      <!--Security dma=SA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>SERIAL30</name>
+        <value>260</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_SPIM00_NS">
+      <name>GLOBAL_SPIM30_S</name>
+      <description>Serial Peripheral Interface Master with EasyDMA 15</description>
       <baseAddress>0x50104000</baseAddress>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
@@ -134621,11 +135894,11 @@ POSSIBILITY OF SUCH DAMAGE.
         <value>260</value>
       </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_SPIS00">
-      <name>GLOBAL_SPIS30</name>
-      <description>SPI Slave 7</description>
+    <peripheral derivedFrom="GLOBAL_SPIS00_NS">
+      <name>GLOBAL_SPIS30_S</name>
+      <description>SPI Slave 15</description>
       <baseAddress>0x50104000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPIM30</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM30_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -134633,11 +135906,11 @@ POSSIBILITY OF SUCH DAMAGE.
         <value>260</value>
       </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_TWIM20">
-      <name>GLOBAL_TWIM30</name>
-      <description>I2C compatible Two-Wire Master Interface with EasyDMA 5</description>
+    <peripheral derivedFrom="GLOBAL_TWIM20_NS">
+      <name>GLOBAL_TWIM30_S</name>
+      <description>I2C compatible Two-Wire Master Interface with EasyDMA 11</description>
       <baseAddress>0x50104000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPIM30</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM30_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -134645,11 +135918,11 @@ POSSIBILITY OF SUCH DAMAGE.
         <value>260</value>
       </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_TWIS20">
-      <name>GLOBAL_TWIS30</name>
-      <description>I2C compatible Two-Wire Slave Interface with EasyDMA 5</description>
+    <peripheral derivedFrom="GLOBAL_TWIS20_NS">
+      <name>GLOBAL_TWIS30_S</name>
+      <description>I2C compatible Two-Wire Slave Interface with EasyDMA 11</description>
       <baseAddress>0x50104000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPIM30</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM30_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -134657,11 +135930,11 @@ POSSIBILITY OF SUCH DAMAGE.
         <value>260</value>
       </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_UARTE00">
-      <name>GLOBAL_UARTE30</name>
-      <description>UART with EasyDMA 6</description>
+    <peripheral derivedFrom="GLOBAL_UARTE00_NS">
+      <name>GLOBAL_UARTE30_S</name>
+      <description>UART with EasyDMA 13</description>
       <baseAddress>0x50104000</baseAddress>
-      <alternatePeripheral>GLOBAL_SPIM30</alternatePeripheral>
+      <alternatePeripheral>GLOBAL_SPIM30_S</alternatePeripheral>
       <!--Security dma=SA-->
       <!--Security securemapping=US-->
       <interrupt>
@@ -134670,9 +135943,10 @@ POSSIBILITY OF SUCH DAMAGE.
       </interrupt>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_COMP</name>
-      <description>Comparator</description>
-      <baseAddress>0x50106000</baseAddress>
+      <name>GLOBAL_COMP_NS</name>
+      <description>Comparator 0</description>
+      <baseAddress>0x40106000</baseAddress>
+      <headerStructName>COMP</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <addressBlock>
@@ -134680,6 +135954,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>COMP_LPCOMP</name>
+        <value>262</value>
+      </interrupt>
       <groupName>COMP</groupName>
       <size>0x20</size>
       <registers>
@@ -135882,10 +137160,11 @@ POSSIBILITY OF SUCH DAMAGE.
       </registers>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_LPCOMP</name>
-      <description>Low-power comparator</description>
-      <baseAddress>0x50106000</baseAddress>
-      <alternatePeripheral>GLOBAL_COMP</alternatePeripheral>
+      <name>GLOBAL_LPCOMP_NS</name>
+      <description>Low-power comparator 0</description>
+      <baseAddress>0x40106000</baseAddress>
+      <alternatePeripheral>GLOBAL_COMP_NS</alternatePeripheral>
+      <headerStructName>LPCOMP</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <addressBlock>
@@ -135893,6 +137172,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>COMP_LPCOMP</name>
+        <value>262</value>
+      </interrupt>
       <groupName>LPCOMP</groupName>
       <size>0x20</size>
       <registers>
@@ -137081,8 +138364,31 @@ POSSIBILITY OF SUCH DAMAGE.
         </register>
       </registers>
     </peripheral>
+    <peripheral derivedFrom="GLOBAL_COMP_NS">
+      <name>GLOBAL_COMP_S</name>
+      <description>Comparator 1</description>
+      <baseAddress>0x50106000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>COMP_LPCOMP</name>
+        <value>262</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_LPCOMP_NS">
+      <name>GLOBAL_LPCOMP_S</name>
+      <description>Low-power comparator 1</description>
+      <baseAddress>0x50106000</baseAddress>
+      <alternatePeripheral>GLOBAL_COMP_S</alternatePeripheral>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>COMP_LPCOMP</name>
+        <value>262</value>
+      </interrupt>
+    </peripheral>
     <peripheral>
-      <name>GLOBAL_WDT30</name>
+      <name>GLOBAL_WDT30_S</name>
       <description>Watchdog Timer 0</description>
       <baseAddress>0x50108000</baseAddress>
       <headerStructName>WDT</headerStructName>
@@ -137093,6 +138399,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>WDT30</name>
+        <value>264</value>
+      </interrupt>
       <groupName>WDT</groupName>
       <size>0x20</size>
       <registers>
@@ -138060,33 +139370,81 @@ POSSIBILITY OF SUCH DAMAGE.
         </register>
       </registers>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_WDT30">
-      <name>GLOBAL_WDT31</name>
+    <peripheral derivedFrom="GLOBAL_WDT30_S">
+      <name>GLOBAL_WDT31_NS</name>
       <description>Watchdog Timer 1</description>
+      <baseAddress>0x40109000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>WDT31</name>
+        <value>265</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_WDT30_S">
+      <name>GLOBAL_WDT31_S</name>
+      <description>Watchdog Timer 2</description>
       <baseAddress>0x50109000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
+      <interrupt>
+        <name>WDT31</name>
+        <value>265</value>
+      </interrupt>
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_P2">
-      <name>GLOBAL_P0</name>
-      <description>GPIO Port 4</description>
+    <peripheral derivedFrom="GLOBAL_P2_NS">
+      <name>GLOBAL_P0_NS</name>
+      <description>GPIO Port 8</description>
+      <baseAddress>0x4010A000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <!--Split access-->
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_P2_NS">
+      <name>GLOBAL_P0_S</name>
+      <description>GPIO Port 9</description>
       <baseAddress>0x5010A000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <!--Split access-->
     </peripheral>
-    <peripheral derivedFrom="GLOBAL_GPIOTE20">
-      <name>GLOBAL_GPIOTE30</name>
-      <description>GPIO Tasks and Events 1</description>
+    <peripheral derivedFrom="GLOBAL_GPIOTE20_NS">
+      <name>GLOBAL_GPIOTE30_NS</name>
+      <description>GPIO Tasks and Events 2</description>
+      <baseAddress>0x4010C000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <!--Split access-->
+      <interrupt>
+        <name>GPIOTE30_0</name>
+        <value>268</value>
+      </interrupt>
+      <interrupt>
+        <name>GPIOTE30_1</name>
+        <value>269</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_GPIOTE20_NS">
+      <name>GLOBAL_GPIOTE30_S</name>
+      <description>GPIO Tasks and Events 3</description>
       <baseAddress>0x5010C000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <!--Split access-->
+      <interrupt>
+        <name>GPIOTE30_0</name>
+        <value>268</value>
+      </interrupt>
+      <interrupt>
+        <name>GPIOTE30_1</name>
+        <value>269</value>
+      </interrupt>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_CLOCK</name>
-      <description>Clock management</description>
-      <baseAddress>0x5010E000</baseAddress>
+      <name>GLOBAL_CLOCK_NS</name>
+      <description>Clock management 0</description>
+      <baseAddress>0x4010E000</baseAddress>
+      <headerStructName>CLOCK</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <addressBlock>
@@ -138094,6 +139452,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>CLOCK_POWER</name>
+        <value>270</value>
+      </interrupt>
       <groupName>CLOCK</groupName>
       <size>0x20</size>
       <registers>
@@ -139874,10 +141236,11 @@ POSSIBILITY OF SUCH DAMAGE.
       </registers>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_POWER</name>
-      <description>Power control</description>
-      <baseAddress>0x5010E000</baseAddress>
-      <alternatePeripheral>GLOBAL_CLOCK</alternatePeripheral>
+      <name>GLOBAL_POWER_NS</name>
+      <description>Power control 0</description>
+      <baseAddress>0x4010E000</baseAddress>
+      <alternatePeripheral>GLOBAL_CLOCK_NS</alternatePeripheral>
+      <headerStructName>POWER</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <addressBlock>
@@ -139885,6 +141248,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>CLOCK_POWER</name>
+        <value>270</value>
+      </interrupt>
       <groupName>POWER</groupName>
       <size>0x20</size>
       <registers>
@@ -140349,10 +141716,11 @@ POSSIBILITY OF SUCH DAMAGE.
       </registers>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_RESET</name>
-      <description>Reset control</description>
-      <baseAddress>0x5010E000</baseAddress>
-      <alternatePeripheral>GLOBAL_CLOCK</alternatePeripheral>
+      <name>GLOBAL_RESET_NS</name>
+      <description>Reset control 0</description>
+      <baseAddress>0x4010E000</baseAddress>
+      <alternatePeripheral>GLOBAL_CLOCK_NS</alternatePeripheral>
+      <headerStructName>RESET</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <addressBlock>
@@ -140681,10 +142049,42 @@ POSSIBILITY OF SUCH DAMAGE.
         </register>
       </registers>
     </peripheral>
+    <peripheral derivedFrom="GLOBAL_CLOCK_NS">
+      <name>GLOBAL_CLOCK_S</name>
+      <description>Clock management 1</description>
+      <baseAddress>0x5010E000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>CLOCK_POWER</name>
+        <value>270</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_POWER_NS">
+      <name>GLOBAL_POWER_S</name>
+      <description>Power control 1</description>
+      <baseAddress>0x5010E000</baseAddress>
+      <alternatePeripheral>GLOBAL_CLOCK_S</alternatePeripheral>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>CLOCK_POWER</name>
+        <value>270</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_RESET_NS">
+      <name>GLOBAL_RESET_S</name>
+      <description>Reset control 1</description>
+      <baseAddress>0x5010E000</baseAddress>
+      <alternatePeripheral>GLOBAL_CLOCK_S</alternatePeripheral>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+    </peripheral>
     <peripheral>
-      <name>GLOBAL_GLITCHDET</name>
+      <name>GLOBAL_GLITCHDET_S</name>
       <description>Voltage glitch detectors</description>
       <baseAddress>0x50111000</baseAddress>
+      <headerStructName>GLITCHDET</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=S-->
       <addressBlock>
@@ -140749,9 +142149,10 @@ POSSIBILITY OF SUCH DAMAGE.
       </registers>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_OSCILLATORS</name>
-      <description>Oscillator control</description>
-      <baseAddress>0x50120000</baseAddress>
+      <name>GLOBAL_OSCILLATORS_NS</name>
+      <description>Oscillator control 0</description>
+      <baseAddress>0x40120000</baseAddress>
+      <headerStructName>OSCILLATORS</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <addressBlock>
@@ -140858,10 +142259,11 @@ POSSIBILITY OF SUCH DAMAGE.
       </registers>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_REGULATORS</name>
-      <description>Voltage regulators</description>
-      <baseAddress>0x50120000</baseAddress>
-      <alternatePeripheral>GLOBAL_OSCILLATORS</alternatePeripheral>
+      <name>GLOBAL_REGULATORS_NS</name>
+      <description>Voltage regulators 0</description>
+      <baseAddress>0x40120000</baseAddress>
+      <alternatePeripheral>GLOBAL_OSCILLATORS_NS</alternatePeripheral>
+      <headerStructName>REGULATORS</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <addressBlock>
@@ -140966,10 +142368,26 @@ POSSIBILITY OF SUCH DAMAGE.
         </register>
       </registers>
     </peripheral>
+    <peripheral derivedFrom="GLOBAL_OSCILLATORS_NS">
+      <name>GLOBAL_OSCILLATORS_S</name>
+      <description>Oscillator control 1</description>
+      <baseAddress>0x50120000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_REGULATORS_NS">
+      <name>GLOBAL_REGULATORS_S</name>
+      <description>Voltage regulators 1</description>
+      <baseAddress>0x50120000</baseAddress>
+      <alternatePeripheral>GLOBAL_OSCILLATORS_S</alternatePeripheral>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+    </peripheral>
     <peripheral>
-      <name>GLOBAL_VREGUSB</name>
-      <description>VREGUSB peripheral</description>
-      <baseAddress>0x50121000</baseAddress>
+      <name>GLOBAL_VREGUSB_NS</name>
+      <description>VREGUSB peripheral 0</description>
+      <baseAddress>0x40121000</baseAddress>
+      <headerStructName>VREGUSB</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <addressBlock>
@@ -140977,6 +142395,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>VREGUSB</name>
+        <value>289</value>
+      </interrupt>
       <groupName>VREGUSB</groupName>
       <size>0x20</size>
       <registers>
@@ -141431,10 +142853,22 @@ POSSIBILITY OF SUCH DAMAGE.
         </register>
       </registers>
     </peripheral>
+    <peripheral derivedFrom="GLOBAL_VREGUSB_NS">
+      <name>GLOBAL_VREGUSB_S</name>
+      <description>VREGUSB peripheral 1</description>
+      <baseAddress>0x50121000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>VREGUSB</name>
+        <value>289</value>
+      </interrupt>
+    </peripheral>
     <peripheral>
-      <name>GLOBAL_LFXO</name>
-      <description>LFXO peripheral</description>
-      <baseAddress>0x50122000</baseAddress>
+      <name>GLOBAL_LFXO_NS</name>
+      <description>LFXO peripheral 0</description>
+      <baseAddress>0x40122000</baseAddress>
+      <headerStructName>LFXO</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <addressBlock>
@@ -141442,6 +142876,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>LFXO</name>
+        <value>290</value>
+      </interrupt>
       <groupName>LFXO</groupName>
       <size>0x20</size>
       <registers>
@@ -142081,10 +143519,22 @@ POSSIBILITY OF SUCH DAMAGE.
         </register>
       </registers>
     </peripheral>
+    <peripheral derivedFrom="GLOBAL_LFXO_NS">
+      <name>GLOBAL_LFXO_S</name>
+      <description>LFXO peripheral 1</description>
+      <baseAddress>0x50122000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>LFXO</name>
+        <value>290</value>
+      </interrupt>
+    </peripheral>
     <peripheral>
-      <name>GLOBAL_LFRC</name>
-      <description>LFRC peripheral</description>
-      <baseAddress>0x50123000</baseAddress>
+      <name>GLOBAL_LFRC_NS</name>
+      <description>LFRC peripheral 0</description>
+      <baseAddress>0x40123000</baseAddress>
+      <headerStructName>LFRC</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <addressBlock>
@@ -142092,6 +143542,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>LFRC</name>
+        <value>291</value>
+      </interrupt>
       <groupName>LFRC</groupName>
       <size>0x20</size>
       <registers>
@@ -142833,10 +144287,22 @@ POSSIBILITY OF SUCH DAMAGE.
         </cluster>
       </registers>
     </peripheral>
+    <peripheral derivedFrom="GLOBAL_LFRC_NS">
+      <name>GLOBAL_LFRC_S</name>
+      <description>LFRC peripheral 1</description>
+      <baseAddress>0x50123000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>LFRC</name>
+        <value>291</value>
+      </interrupt>
+    </peripheral>
     <peripheral>
-      <name>GLOBAL_HFXO64M</name>
-      <description>HFXO64M peripheral</description>
-      <baseAddress>0x50124000</baseAddress>
+      <name>GLOBAL_HFXO64M_NS</name>
+      <description>HFXO64M peripheral 0</description>
+      <baseAddress>0x40124000</baseAddress>
+      <headerStructName>HFXO64M</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <addressBlock>
@@ -142844,6 +144310,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>HFXO64M</name>
+        <value>292</value>
+      </interrupt>
       <groupName>HFXO64M</groupName>
       <size>0x20</size>
       <registers>
@@ -143736,10 +145206,22 @@ POSSIBILITY OF SUCH DAMAGE.
         </register>
       </registers>
     </peripheral>
+    <peripheral derivedFrom="GLOBAL_HFXO64M_NS">
+      <name>GLOBAL_HFXO64M_S</name>
+      <description>HFXO64M peripheral 1</description>
+      <baseAddress>0x50124000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>HFXO64M</name>
+        <value>292</value>
+      </interrupt>
+    </peripheral>
     <peripheral>
-      <name>GLOBAL_OSCRFR</name>
-      <description>OSCRFR peripheral</description>
-      <baseAddress>0x5012A000</baseAddress>
+      <name>GLOBAL_OSCRFR_NS</name>
+      <description>OSCRFR peripheral 0</description>
+      <baseAddress>0x4012A000</baseAddress>
+      <headerStructName>OSCRFR</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <addressBlock>
@@ -143759,10 +145241,18 @@ POSSIBILITY OF SUCH DAMAGE.
         </register>
       </registers>
     </peripheral>
+    <peripheral derivedFrom="GLOBAL_OSCRFR_NS">
+      <name>GLOBAL_OSCRFR_S</name>
+      <description>OSCRFR peripheral 1</description>
+      <baseAddress>0x5012A000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+    </peripheral>
     <peripheral>
-      <name>GLOBAL_AUXPLL</name>
-      <description>AUXPLL</description>
-      <baseAddress>0x50130000</baseAddress>
+      <name>GLOBAL_AUXPLL_NS</name>
+      <description>AUXPLL 0</description>
+      <baseAddress>0x40130000</baseAddress>
+      <headerStructName>AUXPLL</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <addressBlock>
@@ -143770,6 +145260,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>AUXPLL_AUXPM</name>
+        <value>304</value>
+      </interrupt>
       <groupName>AUXPLL</groupName>
       <size>0x20</size>
       <registers>
@@ -144737,10 +146231,11 @@ POSSIBILITY OF SUCH DAMAGE.
       </registers>
     </peripheral>
     <peripheral>
-      <name>GLOBAL_AUXPM</name>
-      <description>AUXPM</description>
-      <baseAddress>0x50130000</baseAddress>
-      <alternatePeripheral>GLOBAL_AUXPLL</alternatePeripheral>
+      <name>GLOBAL_AUXPM_NS</name>
+      <description>AUXPM 0</description>
+      <baseAddress>0x40130000</baseAddress>
+      <alternatePeripheral>GLOBAL_AUXPLL_NS</alternatePeripheral>
+      <headerStructName>AUXPM</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <addressBlock>
@@ -144748,6 +146243,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>AUXPLL_AUXPM</name>
+        <value>304</value>
+      </interrupt>
       <groupName>AUXPM</groupName>
       <size>0x20</size>
       <registers>
@@ -144759,6 +146258,29 @@ POSSIBILITY OF SUCH DAMAGE.
           <access>read-only</access>
         </register>
       </registers>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_AUXPLL_NS">
+      <name>GLOBAL_AUXPLL_S</name>
+      <description>AUXPLL 1</description>
+      <baseAddress>0x50130000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>AUXPLL_AUXPM</name>
+        <value>304</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="GLOBAL_AUXPM_NS">
+      <name>GLOBAL_AUXPM_S</name>
+      <description>AUXPM 1</description>
+      <baseAddress>0x50130000</baseAddress>
+      <alternatePeripheral>GLOBAL_AUXPLL_S</alternatePeripheral>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>AUXPLL_AUXPM</name>
+        <value>304</value>
+      </interrupt>
     </peripheral>
   </peripherals>
 </device>
