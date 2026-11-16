@@ -1,11 +1,11 @@
 {
   "vendor": "Nordic Semiconductor",
-  "generated": "2026-10-26",
+  "generated": "2026-11-16",
   "sources": [
     {
       "name": "nrfx",
       "url": "https://github.com/NordicSemiconductor/nrfx",
-      "version": "e04a873799c0e7206166d62e2e4f185868acf8f9",
+      "version": "5822caf07442042310103c391dd91cbcaaaa1beb",
       "license": "BSD-3-Clause",
       "files": 61
     }
@@ -441,6 +441,6 @@
   ],
   "stats": {
     "total_files": 61,
-    "total_bytes": 266660058
+    "total_bytes": 267590118
   }
 }
